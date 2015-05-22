@@ -18,8 +18,8 @@ url: http://darklost.me
 rss_url: /pages/atom.xml
 
 # gavatar头像及Favicon
-gavatar: /public/img/deer3.png
-favicon: /public/img/deer3.png
+gavatar: /public/img/img_darklost_logo.png
+favicon: /public/img/img_darklost_logo.png
 
 
 # 主题设置，自动激活某个标签
@@ -27,8 +27,8 @@ active: 技术
 
 # 首页除了最新文章外显示分类
 cates: 
-  - Optimization
-  - LaTeX
+  - Mac
+  - Git
 
 # 中文本地化
 locals:
