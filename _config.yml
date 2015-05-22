@@ -18,8 +18,8 @@ url: http://darklost.me
 rss_url: /pages/atom.xml
 
 # gavatar头像及Favicon
-gavatar: /public/img/img_darklost_logo.png
-favicon: /public/img/img_darklost_logo.png
+gavatar: /public/img/img_logo.png
+favicon: /public/img/img_logo.png
 
 
 # 主题设置，自动激活某个标签
