@@ -7,7 +7,6 @@ keywords:
 description: 
 ---
 
-实验室里我申请的垃圾老爷机被师弟玩坏了，弄了一天，最后发现根本就是硬件损伤，想把它砸掉！太坑了。
 
 clang是osx自带的c,c++,objective-c编译器；gnu是常用的c++的轻量级编译器，在windows上通常是下载MinGW；sublime就不多说了；本文的目的就是搭建一个轻量级的C++编辑-编译-调试-运行环境。
 
