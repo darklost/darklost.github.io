@@ -28,7 +28,7 @@ active: 游戏开发
 # 首页除了最新文章外显示分类
 cates: 
   - Cocos2d-x
-  - Git
+  - Android
 
 # 中文本地化
 locals:

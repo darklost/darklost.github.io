@@ -1,6 +1,6 @@
 ---
 layout: post  
-title: Android开发工具
+title: Android工具
 category: 移动开发  
 tags: Android Tools	安全 
 keywords: Android Tools	
@@ -43,6 +43,7 @@ Android 源码
 ###下载地址：
 百度网盘[http://pan.baidu.com/s/1qWA1jPi](http://pan.baidu.com/s/1qWA1jPi) 密码: gn9i		
 52网盘[http://down.52pojie.cn/Tools/Android_Tools/AndCrack_Tool.rar](http://down.52pojie.cn/Tools/Android_Tools/AndCrack_Tool.rar)
+52破解Android_Tools仓库[http://down.52pojie.cn/Tools/Android_Tools/](http://down.52pojie.cn/Tools/Android_Tools/)
 ###第一部分：反编译&编译
   
 
@@ -85,30 +86,35 @@ Android 源码
 
 另：在AndCrack-Tool\Tools\010Editor目录下，打包了010Editor和Android分析常用的格式模块，
        包括32/64位，自行选择配置：
-  
-
+  ![1](http://attach.52pojie.cn/forum/201504/02/125511cp78w1llz7v778zf.png)
 
 ---
 说明：
 >1.说明我是工具党啊
-2.里面的工具并不都是最新版、修改版、优化版，使用中有啥更新了什么的，自行选择哈；
-特别指出几个处理的地方哈：
-①AndroidKiller中集成了几个常用的插入smali代码：
-  
+>2.里面的工具并不都是最新版、修改版、优化版，使用中有啥更新了什么的，自行选择；
+
+####特别指出几个处理的地方：
+**AndroidKiller中集成了几个常用的插入smali代码**
+  ![2](http://attach.52pojie.cn/forum/201504/02/130636u7dr7pbpt2injmx8.png)
 
 需要配置的：
-  
+![3](http://attach.52pojie.cn/forum/201504/02/130808cl2b71l2wb9svgvb.png)  
 
->1.里面的Apktool也有几个，都是网上的开源编译的，我都弄混了，反编译不了就替换着来吧：Apktool更新地址
-  
+>1.里面的Apktool也有几个，都是网上的开源编译的，我都弄混了，反编译不了就替换着来吧：Apktool更新地址[*52pojie跟新地址*](http://down.52pojie.cn/Tools/Android_Tools/)  
+>![8](http://attach.52pojie.cn/forum/201504/02/130930v30nc2n1h6v6ecde.png)
 
 >2.Reflector安装一个吧，然后把里面的路径设置一下；
 >
 >3.所有的东西要么都是网上共享的 要么是自己搜刮别人的，不过我感觉吧，这些应该都可以放出的，有什么疑问的可以联系我哦；
 >
->4.其他没指出的自行摸索哈 我只是提供了一个框架：
+>4.其他没指出的自行摸索， 只是提供了一个框架：
+>
 
- 
+![4](http://attach.52pojie.cn/forum/201504/02/131537bdj1q0uq0880kfxf.png)
+![5](http://attach.52pojie.cn/forum/201504/02/131538dffr8rdfrffkkch8.png)
+
+![6](http://attach.52pojie.cn/forum/201504/02/131539zh1hk55hd2czhthd.png)
+![7](http://attach.52pojie.cn/forum/201504/02/131539zh1hk55hd2czhthd.png) 
 
 
 ---
