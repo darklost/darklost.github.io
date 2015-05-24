@@ -1,7 +1,7 @@
 ---
 layout: post  
 title: OpenGL 1： 着色器与着色语言  
-category: 技术  
+category: 游戏开发 
 tags: OpenGL  
 keywords: OpenGL Shader  
 description:   
