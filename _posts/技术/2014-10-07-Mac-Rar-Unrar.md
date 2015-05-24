@@ -29,15 +29,6 @@ unrar x filename.rar             #解压
 rar a archivename.rar filename   #压缩
 ```
 
-###后记
-为什么要折腾这个，因为今天收到一份rar格式的文件。
-转眼一年了，好快啊。这是要每年送我一个生日蛋糕的节奏吗？如果是的话，这篇博客需要每年更新一次。
-####2013年
-![1](/public/img/birthday/1.jpg)
-####2014年
-![2](/public/img/birthday/2.jpg)
 
-###谢意
-蒲俊楠童鞋，阿里嘎多~
 
 
