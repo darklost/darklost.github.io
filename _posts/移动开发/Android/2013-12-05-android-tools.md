@@ -1,5 +1,7 @@
 ---
-  
+layout: post  
+title: Android开发工具
+category: 移动开发  
 tags: Android Tools	安全 
 keywords: Android Tools	
 description:   
