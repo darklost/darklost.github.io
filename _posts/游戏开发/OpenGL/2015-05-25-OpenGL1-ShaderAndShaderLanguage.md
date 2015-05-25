@@ -1,6 +1,6 @@
 ---
 layout: post  
-title: OpenGL 1： 着色器与着色语言  
+title: OpenGL 2： 着色语言  
 category: 游戏开发 
 tags: OpenGL  
 keywords: OpenGL Shader  
@@ -8,7 +8,7 @@ description:
 ---
 
 
-##着色器与着色语言
+##着色语言
 
 着色语言是一种类C语言，但不像C语言一样支持双精度浮点型(double)、字节型(byte)、短整型(short)、长整型(long)，并且取消了C中的联合体(union)、枚举类型(enum)、无符号数(unsigned)以及位运算等特性。
 
