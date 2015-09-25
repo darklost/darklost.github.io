@@ -13,7 +13,7 @@ description:
 最近朋友问到关于不规则形状的碰撞检测问题，以前只是在某些书、Blog和帖子中看到过是通过物理引擎，没有自己实际写过代码测试，最近在找工作，闲暇时间也比较多，所以写了个测试验证下想法
 
 ```
-项目地址：[github](https://github.com/CodeAndWeb/PhysicsEditor-Cocos2d-x)
+项目地址：[github](https://github.com/darklost/PhysicTest01)
 
 #1. 准备工作
 	下载PhysicsEditor，用于编辑不规则图像[ps：按照我的理解就是拆分成多个三角形或者矩形]
