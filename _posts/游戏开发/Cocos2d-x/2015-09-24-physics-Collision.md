@@ -16,7 +16,7 @@ description:
 项目地址：[github](https://github.com/CodeAndWeb/PhysicsEditor-Cocos2d-x)
 
 #1. 准备工作
-	下载PhysicsEditor，用于编辑不规则图像[ps：按照我的理解就是拆分成多个三角形活着矩形]
+	下载PhysicsEditor，用于编辑不规则图像[ps：按照我的理解就是拆分成多个三角形或者矩形]
 	除了编辑形状用于拆分，还会有一些参数如摩擦力 恢复力 等的参数的设置
 	如下面两图
 ![1](/public/img/cocos/physics/editor_01.png)
