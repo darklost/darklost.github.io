@@ -33,4 +33,20 @@ server {
 
 ```
 
+## 3 `jekyll`加启动参数
+
+`start.sh`
+
+```
+jekyll s --watch --host 0.0.0.0 --port 4000 -B
+
+```
+
+`stop.sh`
+
+```
+pkill -f jekyll
+
+```
+
 ---
