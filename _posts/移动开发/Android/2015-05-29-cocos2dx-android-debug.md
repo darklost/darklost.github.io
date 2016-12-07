@@ -6,9 +6,12 @@ tags: Android Cocos2d-x
 keywords: Android NDK debug
 description:   
 ---
+
 ***常见的错误捕获方法***
 
-###1 logcat
+
+### 1 logcat
+
 Android最常用的调试方式`logcat`:
 
 常见的问题都会在logcat中显示
@@ -16,7 +19,9 @@ Android最常用的调试方式`logcat`:
 *	优势：java层的错误很容易看出来
 *	劣势：c/c++层的问题很难看出来
 
-###2 ndk-stack
+
+### 2 ndk-stack
+
 
 Android C/C++代码出问题比较好用的方式
 
@@ -24,7 +29,9 @@ Android C/C++代码出问题比较好用的方式
 *	优势：常见C/C++代码的问题能通过崩溃的堆栈信息查看
 *	劣势：内存问题很难检测出来
 
-###3 ndk-gdb
+
+### 3 ndk-gdb
+
 
 `注意`
 
