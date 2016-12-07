@@ -9,9 +9,13 @@ description:
 
 > 解决 需要编译Android包时手动拷贝资源的问题（基于cocos2d-x2.2.6  cocos2d-x3.x 已结采用python脚本解决此问题）
 
+
 >> 参考Quick-Cocos2dx 中的build_native.bat 脚本
 
+
 `修改`
+
+
 * 1 针对项目的资源目录进行了修改
 
 * 2 添加了ndk-build clean 的处理 便于Eclispe 使用
