@@ -7,7 +7,7 @@ keywords: cocos2dx android  copyRes ndk
 description:   
 ---
 
-> 解决 需要编译Android包时手动拷贝资源的问题（基于cocos2d-x2.2.6  cocos2d-x3.x 已结采用python脚本解决此问题）
+> 解决 需要编译Android包时手动拷贝资源的问题（基于cocos2d-x2.2.6  cocos2d-x3.x 已经采用python脚本解决此问题）
 
 
 >> 参考Quick-Cocos2dx 中的build_native.bat 脚本
