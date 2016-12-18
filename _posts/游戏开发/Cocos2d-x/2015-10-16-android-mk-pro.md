@@ -1,17 +1,19 @@
 ---
----
+
 layout: post  
 title: Cocos2d-x 通用Android.mk	文件
 category: 游戏开发  
 tags: Android Cocos2d-x 	
 keywords: cocos2dx android mk 
 description:   
+
 ---
 
 通用的Cocos2d-x Android.mk文件
 
 
 ```
+
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
@@ -76,6 +78,7 @@ $(call import-module,.)
 
 
 # _COCOS_LIB_IMPORT_ANDROID_END
+
 
 ```
 
