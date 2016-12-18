@@ -15,21 +15,34 @@ LaTeX是一款权威的科技论文排版软件，不仅可以写论文，也可
 
 本文的目的是将上述三种软件综合部署在Mac上。完成之后，你将可以在Sublime Text里面进行LaTeX代码编辑，用Skim预览生成的PDF文件。更重要的是，让你觉得，写论文也可以是一件很优美的事。
 
-###准备工作：
+<!-- MarkdownTOC -->
+
+- [准备工作：](#准备工作：)
+- [第一步：安装MacTeX](#第一步：安装mactex)
+- [第二步：安装Sublime Text](#第二步：安装sublime-text)
+- [第三步：在Sublime Text中安装Package Control](#第三步：在sublime-text中安装package-control)
+- [第四步：安装LaTeX Tools](#第四步：安装latex-tools)
+- [第五步：安装Skim](#第五步：安装skim)
+- [全部完成，✌️](#全部完成，✌️)
+
+<!-- /MarkdownTOC -->
+
+
+### 准备工作：
 
 - Mac上至少4GB的空余空间
 - 高速的互联网连接
 
-###第一步：安装MacTeX
+### 第一步：安装MacTeX
 - 进入[MacTeX官网](http://www.tug.org/mactex)下载`MacTeX.pkg`文件。文件大约2GB，需要一段时间才能完成下载，趁现在去喝杯咖啡吧。
 - 下载完成之后，双击`MacTeX.pkg`进行安装。
 - 安装完成之后，会看到许多与TeX有关的程序图标，暂时忽略它们。
 
-###第二步：安装Sublime Text
+### 第二步：安装Sublime Text
 - 进入[Sublime Text官网](http://www.sublimetext.com)下载最新版本的Sublime Text。这里我下载的是Sublime Text 3.
 - 下载完成之后，将文件拖入应用程序文件夹安装。
 
-###第三步：在Sublime Text中安装Package Control
+### 第三步：在Sublime Text中安装Package Control
 我们需要在Sublime Text中下载插件以便能够很好地操作与LaTeX有关的文件。而插件是通过Package Control下载的。
 
 - 进入[Package Control官网](http://sublime.wbond.net/installation)复制灰色区块的代码。
@@ -38,13 +51,13 @@ LaTeX是一款权威的科技论文排版软件，不仅可以写论文，也可
 - 将刚才复制的代码粘贴到控制面板。
 - 按下“`Enter`”回车键。然后退出并重启Sublime Text。
 
-###第四步：安装LaTeX Tools
+### 第四步：安装LaTeX Tools
 - Sublime Text重启后，按下“`Command+Shift+P`”打开命令托盘Command pallet，这一步也可以通过Tools下拉菜单完成。
 - 在命令托盘里输入“`Install Package`”，按下`Enter`回车建。
 - 完成之后，输入“`LaTeX Tools`”，找到这一项并回车安装。
 - 退出并重启Sublime Text。
 
-###第五步：安装Skim
+### 第五步：安装Skim
 - 进[Skim](http://skim-app.sourceforge.net)下载Skim并安装
 - 打开Skim，在菜单栏中`Skim > Preference(选项) > Sync(同步)`
 - 在预设菜单中选择`Sublime Text`
@@ -53,8 +66,8 @@ LaTeX是一款权威的科技论文排版软件，不仅可以写论文，也可
 
 - 关闭上面这个窗口。
 
-###全部完成，✌️
+### 全部完成，✌️
 现在，我们已经做完了所有的步骤，可以打开Sublime Text，`Command+N`新建文件并在里面编写LaTeX代码了，完成编辑之后，`Command+S`保存文件，`Command+B`编译并运行，这时就可以在Skim里面看到PDF预览了。
 
-
+---
 

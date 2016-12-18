@@ -123,7 +123,7 @@ Makefile函数调用形式：$(<function> <arguments>)或${<function> <arguments
 (4)my-dir由编译系统提供，返回 Android.mk 当前所在的路径(包含Android.mk文件的目录)。
  
 
-###`#2`
+### `#2`
  ***自定义了一个all_cpp_files_recursively函数，递归遍历返回给定目录下所有C++源文件，google一下有很多类似代码。***
  
 **需要了解的知识点(`eval`函数、`wildcard`函数，`foreach`函数)**
@@ -142,10 +142,10 @@ $(files)的值是“a.o b.o c.o d.o”
 4. `$(src_files:$(LOCAL_PATH)/%=%)`进行了文本替换，`”%”`表示一个或多个任意字符，这里是去掉cpp/c文件路径中的`$(LOCAL_PATH)`部分，因为`LOCAL_SRC_FILES`文件的路径需要是`Android.mk`的相对路径。
  
 
-###`#3`. 自定义了一个all_c_files_recursively函数，递归遍历返回给定目录下所有C源文件。
+### `#3`. 自定义了一个all_c_files_recursively函数，递归遍历返回给定目录下所有C源文件。
  
 
-###`#4 #5 #6`
+### `#4 #5 #6`
 
 ***声明预编译库***
 
@@ -160,20 +160,20 @@ PS:
 * `PREBUILT_SHARED_LIBRARY`的`LOCAL_SRC_FILES`必须是预编译共享库文件(eg：t.so文件)，`PREBUILT_STATIC_LIBRARY`必须是预编译静态库文件(eg：t.a文件)。
  
 
-###`#11` 
+### `#11` 
 这里需要注意`LOCAL_WHOLE_STATIC_LIBRARIES`和`LOCAL_STATIC_LIBRARIES`的区别：
 前者会包含静态库的所有的源代码，后者会允许链接器移除一些dead code（没有使用的变量或函数，比如一些给共享库使用的接口）。
  
 
-###`#12` 
+### `#12` 
 `-Xlinker`表示它后面的参数是给链接器使用的，`–allow-multiple-definition`表示允许发生多重定义并且使用第一个定义（跟链接顺序有关）。
  
 
-###`#13` 
+### `#13` 
 读取`BUILD_SHARED_LIBRARY`变量，把`west_shared`编译成共享库，是编译系统提供的，指向一个`GNU Makefile`脚本，它负责收集自从上次调用`include $(CLEAR_VARS)`之后的定义的`LOCAL_XXXX`变量的所有信息，决定怎么正确的编译出所需的共享库。
  
 
-###`#14`
+### `#14`
   ***`NDK_MODULE_PATH`***是一个很重要的变量.
   
   当`android.mk`中使用了`$(call import-module,XXX)`函数引入外部模块文件时会用到，用以指示该往哪里去找这个`Android.mk`文件。

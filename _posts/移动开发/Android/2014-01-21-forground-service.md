@@ -41,3 +41,5 @@ Notification notification = new Notification(R.drawable.ic_launcher,
 	}
 	
 ```
+
+---

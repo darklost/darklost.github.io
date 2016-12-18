@@ -9,7 +9,7 @@ description:
 
 折腾了一段时间mac上的OpenGL Shader Builder,写出了第一个`shader program`：魔毯(copy:))
 
-###Program
+### Program
 **Demo01.fs**
 
 ```glsl
@@ -37,13 +37,13 @@ void main()
 
 ```
 
-###Sybomls
+### Sybomls
 如下图：
 
 ![1](/public/img/opengl/opengl-demo01-sybomls.gif)
 
 
-###最终效果图：
+### 最终效果图：
 
 
 ![2](/public/img/opengl/opengl-demo01.gif)

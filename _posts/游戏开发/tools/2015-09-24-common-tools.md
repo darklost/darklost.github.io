@@ -9,7 +9,7 @@ description:
 `持续收集更新中`
 
 项目地址：[github](https://github.com/darklost/tools.git)
-###Python脚本（没有特殊注明，都是基于python2.7）
+### Python脚本（没有特殊注明，都是基于python2.7）
 
 1. ResGenerate.py
    一个用于Cocos2d-x中生成静态资源头文件的脚本工具

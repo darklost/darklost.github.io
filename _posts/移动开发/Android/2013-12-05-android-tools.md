@@ -6,7 +6,7 @@ tags: Android Tools	安全
 keywords: Android Tools	
 description:   
 ---
-##开发工具
+## 开发工具
 Android 源码
 
 官方网站：[http://source.android.com](http://source.android.com "http://source.android.com")
@@ -37,14 +37,14 @@ Android 源码
 
 ----------
 
-##逆向工具
+## 逆向工具
 
 `工具转载自52破解论坛`
-###下载地址：
+### 下载地址：
 百度网盘[http://pan.baidu.com/s/1qWA1jPi](http://pan.baidu.com/s/1qWA1jPi) 密码: gn9i		
 52网盘[http://down.52pojie.cn/Tools/Android_Tools/AndCrack_Tool.rar](http://down.52pojie.cn/Tools/Android_Tools/AndCrack_Tool.rar)
 52破解Android_Tools仓库[http://down.52pojie.cn/Tools/Android_Tools/](http://down.52pojie.cn/Tools/Android_Tools/)
-###第一部分：反编译&编译
+### 第一部分：反编译&编译
   
 
 **ApkIDE**：比较旧的Android反编译的IDE，集成功能各种方便，但是不知道扩展，慢慢落后了..
@@ -56,7 +56,7 @@ Android 源码
 **ApkTool原生**：最近用的少了，方便查看错误信息.	
 **Jeb**：主要用它来增强反编译Java代码的准确性，强大一逼；
 
-###第二部分：修改工具
+### 第二部分：修改工具
   
 
 **Reflector**：这个工具是修改Unity3D游戏中Dll的主要工具（没在包里..安装版，自行下载）
@@ -64,7 +64,7 @@ Android 源码
 **Winhex**：二进制编辑工具，ida分析之后，一般用这个修改；
 **DexFixer**：如果直接修改了dex的二进制码，就需要用这个修复一下；
 
-###第三部分：辅助工具
+### 第三部分：辅助工具
   
 
 **ApkEncryptTool**：apk伪加密/解密工具，很少用；	

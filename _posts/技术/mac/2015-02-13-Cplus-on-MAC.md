@@ -11,8 +11,8 @@ description:
 clang是osx自带的c,c++,objective-c编译器；gnu是常用的c++的轻量级编译器，在windows上通常是下载MinGW；sublime就不多说了；本文的目的就是搭建一个轻量级的C++编辑-编译-调试-运行环境。
 
 
-##MAC上
-###方法一：
+## MAC上
+### 方法一：
 1. 打开sublime，`command`+`shift`+`P`
 2. 输入install，选择`install package`，回车
 3. 输入sublimeClang，回车下载
@@ -21,14 +21,14 @@ clang是osx自带的c,c++,objective-c编译器；gnu是常用的c++的轻量级�
 6. 双击name运行
 7. 如果运行过程不需要输入数据，可以直接在sublime中`command`+`shift`+`B`运行
 
-###方法二
+### 方法二
 1. AppStore中下载Xcode
 2. 使用这个IDE
 
 
-##WINDOWS上
+## WINDOWS上
 
-###方法一：
+### 方法一：
 1. 安装Installation Manager，运行，选择需要下载的组件，比如这里需要C++有关的组件
 2. 将MinGW的安装路径添加到环境变量中
 3. cmd中输入`g++ -v`来检测gnu是否安装成功
@@ -36,18 +36,18 @@ clang是osx自带的c,c++,objective-c编译器；gnu是常用的c++的轻量级�
 5. `preferences`->`browse packages`->`gcc`(好像是这样，反正自己摸索就好了)
 6. OK，完成
 
-###方法二：
+### 方法二：
 1. Visual Studio
 2. 使用该IDE
 
 
-###有用的资料
+### 有用的资料
 【1】[Writing and Running C++ Programs in the UNIX Environment using g++](https://www.cs.drexel.edu/~mcs171/Sp14/extras/g++/index.html)
 
 【2】[Writing and Running C++ Programs in the Mac OS X 10.4 Environment using xCode](https://www.cs.drexel.edu/~mcs171/Sp14/extras/xCode_Instructions/index.html)
 
 
-
+---
 
 
 

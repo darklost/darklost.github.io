@@ -7,6 +7,9 @@ keywords:
 description: 
 ---
 
+
+
+
 master: 默认开发分支
 
 origin: 默认远程版本库
@@ -15,14 +18,14 @@ Head: 默认开发分支
 
 Head^: Head的父提交
 
-###创建版本库
+### 创建版本库
 
 ```
 $ git clone <url>   #克隆远程版本库
 $ git init          #初始化本地版本库
 ```
 
-###修改和提交
+### 修改和提交
 
 ```
 $ git status        #查看状态
@@ -36,7 +39,7 @@ $ git commit -m "commit messages"  #提交所有更新过的文件
 $ git commit --amend               #修改最后一次改动
 ```
 
-###查看提交历史
+### 查看提交历史
 
 ```
 $ git log                    #查看提交历史
@@ -44,7 +47,7 @@ $ git log -p <file>          #查看指定文件的提交历史
 $ git blame <file>           #以列表方式查看指定文件的提交历史
 ```
 
-###撤销
+### 撤销
 
 ```
 $ git reset --hard HEAD      #撤销工作目录中所有未提交文件的修改内容
@@ -53,7 +56,7 @@ $ git revert <commit>        #撤销指定的提交
 $ git log --before="1 days"  #退回到之前1天的版本 
 ```
 
-###分支与标签
+### 分支与标签
 
 ```
 $ git branch                   #显示所有本地分支
@@ -65,14 +68,14 @@ $ git tag <tagname>            #基于最新提交创建标签
 $ git tag -d <tagname>         #删除标签
 ```
 
-###合并与衍合
+### 合并与衍合
 
 ```
 $ git merge <branch>        #合并指定分支到当前分支
 $ git rebase <branch>       #衍合指定分支到当前分支
 ```
 
-###远程操作
+### 远程操作
 
 ```
 $ git remote -v                   #查看远程版本库信息
@@ -87,8 +90,8 @@ $ git push --tags                       #上传所有标签
 
 
 
-###资料链接
+### 资料链接
 1. [Try Git](https://try.github.io/levels/1/challenges/1)
 
 
-
+---

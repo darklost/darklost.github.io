@@ -8,7 +8,7 @@ description:
 ---
 
 
-###命名空间宏：
+### 命名空间宏：
 ```
 USING_NS_CC; // using namespace cocos2d
 
@@ -23,7 +23,7 @@ NS_CC_END; // }
 
 
 
-###判断一个精灵被点击：
+### 判断一个精灵被点击：
 
 1、层要接收点击消息。2、回调函数中取得点击坐标。3、取得精灵用boudingBox().containsPoint函数判断。（或使用 convertTouchToNodeSpaceAR 方法）
 
@@ -33,7 +33,7 @@ NS_CC_END; // }
 
 
 
-###多Layer点击处理：
+### 多Layer点击处理：
 
 1、使用ccTouchesBegan()。此函数返回true，表示中断消息链，本层接收消息；返回false则本层不接收消息。
 
@@ -42,7 +42,7 @@ NS_CC_END; // }
 具体可参考文章：[http://www.myexception.cn/operating-system/1118630.html](http://www.myexception.cn/operating-system/1118630.html) cocos2d-x 建立自己的层级窗口消息机制
 
 
-###精灵相关
+### 精灵相关
 * * *
 
 精灵拉长：

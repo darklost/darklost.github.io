@@ -6,7 +6,7 @@ tags: OpenGL
 keywords: OpenGL  
 description:   
 ---
-###OpenGL ES 2.0渲染管线	
+### OpenGL ES 2.0渲染管线	
 OpenGL ES 2.0渲染管线	实现了可编程的图形管线，比起1.x的固定管线要复杂和灵活很多，由两部分规范组成：
 
 *	Opengl es 2.0 API规范
@@ -19,7 +19,7 @@ OpenGL ES 2.0渲染管线	实现了可编程的图形管线，比起1.x的固定
 
  
 
-####1. 顶点着色器(VertexShader)
+#### 1. 顶点着色器(VertexShader)
 顶点着色器对顶点实现了一种通用的可编程方法。	
 顶点着色器的输入数据由下面组成：	
 **Attributes：**使用顶点数组封装每个顶点的数据，一般用于每个顶点都各不相同的变量，如顶点位置、颜色等。
@@ -70,7 +70,7 @@ OpenGL ES 2.0渲染管线	实现了可编程的图形管线，比起1.x的固定
 
 第16行的gl_Position 是内置的varying变量，不需要声明，顶点着色器必须把变换后的位置赋值给它。
 
-####2.图元装配(Primitive Assembly)
+#### 2.图元装配(Primitive Assembly)
 顶点着色器之后，渲染流水线的下一个阶段是图元装配，图元是一个能用opengl es绘图命令绘制的几何体，绘图命令指定了一组顶点属性，描述了图元的几何形状和图元类型。
 
 顶点着色器使用这些顶点属性计算顶点的位置、颜色以及纹理坐标，这样才能传到片元着色器。
@@ -79,14 +79,14 @@ OpenGL ES 2.0渲染管线	实现了可编程的图形管线，比起1.x的固定
 
 背面剔除操作也会执行，它根据图元是正面还是背面，如果是背面则丢弃该图元。经过裁剪和背面剔除操作后，就进入渲染流水线的下一个阶段：光栅化。
 
-####3. 光栅化(Rasterization)
+#### 3. 光栅化(Rasterization)
 光栅化阶段把图元转换成片元集合，之后会提交给片元着色器处理，这些片元集合表示可以被绘制到屏幕的像素。如下图所示：
 
 ![3](/public/img/opengl/Rasterzation_stage.png)
 
  
 
-####4. 片元着色器(FragmentShader)
+#### 4. 片元着色器(FragmentShader)
 片元着色器对片元实现了一种通用的可编程方法，它对光栅化阶段产生的每个片元进行操作，需要的输入数据如下：
 
 **Varying variables：**顶点着色器输出的varying变量经过光栅化插值计算后产生的作用于每个片元的值。
@@ -115,7 +115,7 @@ OpenGL ES 2.0渲染管线	实现了可编程的图形管线，比起1.x的固定
 ```
 第1行代码设置默认的精度修饰符，有`highp`、`mediump`、`lowp`，这个后面再详细解释。第3行代码定义了片元着色器的输入数据，顶点着色器必须赋值给片元着色器一组一样的varying变量。注意：`gl_FragColor`是片元着色器唯一的输出，第9行代码把输入数据`v_color`赋值给`gl_FragColor`。
 
-####5. 逐个片元操作阶段(Per-Fragment Operations)
+#### 5. 逐个片元操作阶段(Per-Fragment Operations)
 片元着色器之后就是逐个片元操作阶段，包括一系列的测试阶段。一个光栅化阶段产生的具有屏幕坐标(Xw, Yw)的片元，只能修改`framebuffer`(帧缓冲)中位置在`(Xw, Yw)`的像素。下图是Opengl es 2.0逐片元操作的过程：
 
 ![5](/public/img/opengl/per_fragment_operations.png)
