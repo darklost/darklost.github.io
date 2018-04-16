@@ -2,7 +2,7 @@
 layout: post  
 title: 2015	年终总结
 category: 随笔  
-tags: 年终总结 	
+tags: 随笔 年终总结 	
 keywords: 年终总结
 description:  个人年终总结 
 ---

@@ -5,10 +5,10 @@ markdown: kramdown
 # 作者信息
 author: 
   name: D.K.
-  email: 453523830@qq.com 
+  email: darklost.me@qq.com 
   link: http://darklost.me
   github: http://github.com/darklost
-  music: http://user.qzone.qq.com/453523830/305
+  music: http://music.163.com/playlist?id=51235950&userid=53298482
 
 
 # 站点信息
@@ -23,12 +23,13 @@ favicon: /public/img/img_logo.png
 
 
 # 主题设置，自动激活某个标签
-active: 游戏开发
+active: 随笔
 
 # 首页除了最新文章外显示分类
 cates: 
-  - Cocos2d-x
-  - Android
+  - 随笔
+  - 书单
+
 
 # 中文本地化
 locals:
