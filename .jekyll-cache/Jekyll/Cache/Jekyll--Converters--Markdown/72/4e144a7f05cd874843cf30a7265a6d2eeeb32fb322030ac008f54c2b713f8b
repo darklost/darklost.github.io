@@ -1,0 +1,112 @@
+I"�#<h2 id="lua函数的调用有两种形式">lua函数的调用有两种形式</h2>
+<p>示例：</p>
+
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mSprite</span><span class="p">.</span><span class="n">setPosition</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+
+<span class="n">mSprite</span><span class="p">:</span><span class="n">setPosition</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="最简单的类">最简单的类</h2>
+<p>我们先来看看简单的，来创建一个“类”试试，如下代码：</p>
+
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">MSprite</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="k">function</span> <span class="nc">MSprite</span><span class="p">.</span><span class="nf">setPosition</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">Msprite</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+        <span class="n">Msprite</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
+    <span class="k">end</span>
+   
+    <span class="n">MSprite</span><span class="p">.</span><span class="n">setPosition</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"MSprite坐标("</span> <span class="o">..</span> <span class="n">MSprite</span><span class="p">.</span><span class="n">x</span> <span class="o">..</span> <span class="s2">","</span> <span class="o">..</span> <span class="n">MSprite</span><span class="p">.</span><span class="n">y</span> <span class="o">..</span> <span class="s2">")"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>本质是创建了一个table，并给table添加一些属性。
+输出结果如下：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MSprite坐标(1,2)
+</code></pre></div></div>
+
+<p>setPosition函数，函数本质是通过MSprite这个table来调用x和y字段的。
+并且，通过setPosition的方式是，使用点号（.），此乃常规的函数调用方式。</p>
+
+<p>##不用table的本名可以吗？——self的作用
+上面的例子，如果这样调用的话：</p>
+
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kd">local</span> <span class="n">who</span> <span class="o">=</span> <span class="n">MSprite</span><span class="p">;</span>
+    <span class="n">MSprite</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">;</span>
+   
+    <span class="n">who</span><span class="p">.</span><span class="n">setPosition</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>运行会报错，虽然通过who确实可以成功调用setPosition函数，但函数里需要用到MSprite，而此时的MSprite已经为nil了。</p>
+
+<p>然而可以这么做：</p>
+
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">Msprite</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="k">function</span> <span class="nc">Msprite</span><span class="p">.</span><span class="nf">setPosition</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
+    <span class="k">end</span>
+   
+    <span class="kd">local</span> <span class="n">who</span> <span class="o">=</span> <span class="n">Msprite</span><span class="p">;</span>
+    <span class="n">Msprite</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">;</span>
+     
+    <span class="n">who</span><span class="p">.</span><span class="n">setPosition</span><span class="p">(</span><span class="n">who</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Msprite坐标("</span> <span class="o">..</span> <span class="n">who</span><span class="p">.</span><span class="n">x</span> <span class="o">..</span> <span class="s2">","</span> <span class="o">..</span> <span class="n">who</span><span class="p">.</span><span class="n">y</span> <span class="o">..</span> <span class="s2">")"</span><span class="p">);</span>
+
+</code></pre></div></div>
+
+<p>输出结果仍然是：</p>
+
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Msprite</span><span class="err">坐标</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div></div>
+<p>注意到setPosition的第一个参数，我们强制要求传入一个参数，这个参数就是Msprite本身。于是，在调用setPosition函数时，传入who，who的内容就是Msprite的内容，于是，setPosition就能正常执行了。</p>
+
+<p>##方便的偷懒方法——默认的self参数，以及默认传递self参数</p>
+
+<p>如果每次创建函数和调用函数都要这么去处理self，那他一定不是程序员
+所以，Lua提供了一个新的使用方式–冒号（:）。</p>
+
+<p>如下代码：</p>
+
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">Msprite</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="k">function</span> <span class="nf">Msprite</span><span class="p">:</span><span class="n">setPosition</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
+    <span class="k">end</span>
+    <span class="kd">local</span> <span class="n">who</span> <span class="o">=</span> <span class="n">Msprite</span><span class="p">;</span>
+    <span class="n">Msprite</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">;</span>
+     
+    <span class="n">who</span><span class="p">:</span><span class="n">setPosition</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+
+</code></pre></div></div>
+
+<p>第一，留意setPosition函数的定义，使用了冒号；</p>
+
+<p>第二，留意setPosition函数的调用，使用了冒号。</p>
+
+<p><strong>冒号的作用就是：</strong></p>
+
+<p>定义函数时，给函数的添加隐藏的第一个参数self；</p>
+
+<p>调用函数时，默认把当前调用者作为第一个参数传递进去。</p>
+
+<p>使用了冒号之后，就相当于我们刚刚使用点号时一样，只是我们不再需要显式地定义self参数以及主动地传递who参数。</p>
+
+<p>##最后
+点号和冒号的区别，由此明了:冒号是为了方便(为偷懒而生)。</p>
+
+<p>如果是使用Cocos2d-x lua来开发的话，大部分情况下都是使用冒号的。</p>
+
+<p>原因很简单，因为大部分情况下我们都要使用到self参数，就像C++的this关键字一样。</p>
+
+<hr />
+:ET

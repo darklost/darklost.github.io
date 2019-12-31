@@ -1,0 +1,40 @@
+I"<p>jekyll 默认开启地址端口 <code class="highlighter-rouge">127.0.0.1:4000</code>
+在使用虚拟机时即使做端口转发也无法访问</p>
+
+<p>解决方法</p>
+
+<h2 id="1-_configyml中配置ip-端口添加上">1. <code class="highlighter-rouge">_config.yml</code>中配置ip 端口,添加上：</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>host: 0.0.0.0
+port: xxxx
+
+</code></pre></div></div>
+
+<h2 id="2nginx端口转发">2.<code class="highlighter-rouge">nginx</code>端口转发</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server {
+      listen       80;
+      server_name name.darklost.me;
+       location / {
+          proxy_pass   http://127.0.0.1:port;
+     }
+   }
+
+</code></pre></div></div>
+
+<h2 id="3-jekyll加启动参数">3 <code class="highlighter-rouge">jekyll</code>加启动参数</h2>
+
+<p><code class="highlighter-rouge">start.sh</code></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jekyll s --watch --host 0.0.0.0 --port 4000 -B
+
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">stop.sh</code></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pkill -f jekyll
+
+</code></pre></div></div>
+
+<hr />
+:ET

@@ -1,0 +1,68 @@
+I"�<h3 id="1linux下有个开源的内存修改项目scanmem">1.linux下有个开源的内存修改项目scanmem。</h3>
+
+<p>项目地址:</p>
+
+<ol>
+  <li>
+    <p><a href="http://taviso.decsystem.org/scanmem.html" title="http://taviso.decsystem.org/scanmem.html">http://taviso.decsystem.org/scanmem.html</a></p>
+  </li>
+  <li>
+    <p><a href="http://code.google.com/p/scanmem/" title="http://code.google.com/p/scanmem/">http://code.google.com/p/scanmem/</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/coolwanglu/scanmem" title="https://github.com/coolwanglu/scanmem">https://github.com/coolwanglu/scanmem</a></p>
+  </li>
+</ol>
+
+<h3 id="2android下要针对其他进程进行内存修改是基于ptrace系统调用因此要想学会android下的进程注入首先需要了解ptrace的用法">2.Android下要针对其他进程进行内存修改是基于ptrace系统调用，因此要想学会android下的进程注入，首先需要了解ptrace的用法。</h3>
+
+<ul>
+  <li>
+    <p>参考博客：<a href="http://blog.sina.com.cn/s/blog_4ac74e9a0100n7w1.html" title="http://blog.sina.com.cn/s/blog_4ac74e9a0100n7w1.html">http://blog.sina.com.cn/s/blog_4ac74e9a0100n7w1.html</a></p>
+  </li>
+  <li>
+    <p>备注：在ubuntu下输入man ptrace命令，查看具体描述。</p>
+  </li>
+</ul>
+
+<h3 id="3android系统是基于linux系统在linux系统中可以通过ptrace系统调用实现对进程的内存修改过程大致过程如下">3.Android系统是基于Linux系统，在linux系统中可以通过ptrace系统调用实现对进程的内存修改。过程大致过程如下：</h3>
+
+<ul>
+  <li>
+    <p>[1]通过远程进程pid，ATTACH到远程进程</p>
+  </li>
+  <li>
+    <p>[2]获取远程进程寄存器值，并保存，以便注入完成后恢复进程原有状态</p>
+  </li>
+  <li>
+    <p>[3]获取远程进程系统调用mmap、dlopen、dlsym调用地址</p>
+  </li>
+  <li>
+    <p>[4]与前端交互根据值搜索根据proc/&lt;pid&gt;/maps中的地址和偏移量</p>
+  </li>
+  <li>
+    <p>[5]根据值得变化，来确定内存地址（一般没办法精确到一个）</p>
+  </li>
+  <li>
+    <p>[6]根据内存地址修改成前端需要的值</p>
+  </li>
+  <li>
+    <p>[7]恢复远程进程寄存器</p>
+  </li>
+  <li>
+    <p>[8]DETACH远程进程。</p>
+  </li>
+</ul>
+
+<p>备注：其中4-5两步可以有多种方式来搜索定位</p>
+
+<p>参考：</p>
+
+<p><a href="http://www.sanwho.com/133.html" title="http://www.sanwho.com/133.html">http://www.sanwho.com/133.html</a></p>
+
+<p><a href="http://blog.csdn.net/mldxs/article/details/14486827" title="http://blog.csdn.net/mldxs/article/details/14486827">http://blog.csdn.net/mldxs/article/details/14486827</a></p>
+
+<p><a href="http://zhangwenxin82.blog.163.com/blog/static/114595956201171510512459/" title="http://zhangwenxin82.blog.163.com/blog/static/114595956201171510512459/">http://zhangwenxin82.blog.163.com/blog/static/114595956201171510512459/</a></p>
+
+<hr />
+:ET

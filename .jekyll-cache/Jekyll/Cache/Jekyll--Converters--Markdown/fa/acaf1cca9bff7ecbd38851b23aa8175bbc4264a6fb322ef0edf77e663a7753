@@ -1,0 +1,46 @@
+I"	<p>clang是osx自带的c,c++,objective-c编译器；gnu是常用的c++的轻量级编译器，在windows上通常是下载MinGW；sublime就不多说了；本文的目的就是搭建一个轻量级的C++编辑-编译-调试-运行环境。</p>
+
+<h2 id="mac上">MAC上</h2>
+<h3 id="方法一">方法一：</h3>
+<ol>
+  <li>打开sublime，<code class="highlighter-rouge">command</code>+<code class="highlighter-rouge">shift</code>+<code class="highlighter-rouge">P</code></li>
+  <li>输入install，选择<code class="highlighter-rouge">install package</code>，回车</li>
+  <li>输入sublimeClang，回车下载</li>
+  <li>编写一个简单的c++程序，保存为name.cpp</li>
+  <li>在terminal中，<code class="highlighter-rouge">clang++ name.cpp -o name</code>或者<code class="highlighter-rouge">g++ name.cpp -o name</code></li>
+  <li>双击name运行</li>
+  <li>如果运行过程不需要输入数据，可以直接在sublime中<code class="highlighter-rouge">command</code>+<code class="highlighter-rouge">shift</code>+<code class="highlighter-rouge">B</code>运行</li>
+</ol>
+
+<h3 id="方法二">方法二</h3>
+<ol>
+  <li>AppStore中下载Xcode</li>
+  <li>使用这个IDE</li>
+</ol>
+
+<h2 id="windows上">WINDOWS上</h2>
+
+<h3 id="方法一-1">方法一：</h3>
+<ol>
+  <li>安装Installation Manager，运行，选择需要下载的组件，比如这里需要C++有关的组件</li>
+  <li>将MinGW的安装路径添加到环境变量中</li>
+  <li>cmd中输入<code class="highlighter-rouge">g++ -v</code>来检测gnu是否安装成功</li>
+  <li>打开sublime text 3</li>
+  <li><code class="highlighter-rouge">preferences</code>-&gt;<code class="highlighter-rouge">browse packages</code>-&gt;<code class="highlighter-rouge">gcc</code>(好像是这样，反正自己摸索就好了)</li>
+  <li>OK，完成</li>
+</ol>
+
+<h3 id="方法二-1">方法二：</h3>
+<ol>
+  <li>Visual Studio</li>
+  <li>使用该IDE</li>
+</ol>
+
+<h3 id="有用的资料">有用的资料</h3>
+<p>【1】<a href="https://www.cs.drexel.edu/~mcs171/Sp14/extras/g++/index.html">Writing and Running C++ Programs in the UNIX Environment using g++</a></p>
+
+<p>【2】<a href="https://www.cs.drexel.edu/~mcs171/Sp14/extras/xCode_Instructions/index.html">Writing and Running C++ Programs in the Mac OS X 10.4 Environment using xCode</a></p>
+
+<hr />
+
+:ET

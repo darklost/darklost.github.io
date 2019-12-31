@@ -1,0 +1,72 @@
+I"�<h3 id="认识ext2文件系统">认识EXT2文件系统</h3>
+<p>每种操作系统能够使用的文件系统并不相同。 举例来说，windows 98以前的微软操作系统主要利用的文件系统是<code class="highlighter-rouge">FAT(或FAT16)</code>，windows 2000以后的版本有所谓的<code class="highlighter-rouge">NTFS</code>文件系统，至于Linux的正统文件系统则为<code class="highlighter-rouge">Ext2</code>(Linux second extended file system, ext2fs)这一个。此外，在默认的情况下，windows操作系统是不会认识Linux的Ext2的。</p>
+
+<p>那么文件系统是如何运行的呢？这与操作系统的文件数据有关。较新的操作系统的文件数据除了文件实际内容外，通常含有非常多的属性，例如Linux操作系统的文件权限(rwx)与文件属性(拥有者、群组、时间参数等)。 文件系统通常会将这两部份的数据分别存放在不同的区块，权限与属性放置到<code class="highlighter-rouge">inode</code>中，至于实际数据则放置到<code class="highlighter-rouge">data block</code>区块中。 另外，还有一个超级区块(<code class="highlighter-rouge">superblock</code>)会记录整个文件系统的整体信息，包括inode与block的总量、使用量、剩余量等。</p>
+
+<h3 id="文件系统的简单操作">文件系统的简单操作</h3>
+
+<h3 id="磁盘的分割格式化检验与挂载">磁盘的分割、格式化、检验与挂载</h3>
+
+<ul>
+  <li>磁盘分区： fdisk, partprobe</li>
+  <li>磁盘格式化： mkfs, mke2fs</li>
+  <li>磁盘检验： fsck, badblocks</li>
+  <li>磁盘挂载与卸除： mount, umount</li>
+  <li>磁盘参数修订： mknod, e2label, tune2fs, hdparm</li>
+</ul>
+
+<h3 id="配置启动挂载">配置启动挂载</h3>
+
+<ul>
+  <li>启动挂载 /etc/fstab 及 /etc/mtab</li>
+  <li>特殊装置 loop 挂载(映象档不刻录就挂载使用)</li>
+</ul>
+
+<p>###内存置换空间(swap)之建置</p>
+
+<ul>
+  <li>使用实体分割槽建置swap</li>
+  <li>使用文件建置swap</li>
+  <li>swap使用上的限制</li>
+</ul>
+
+<h3 id="文件系统的特殊观察与操作">文件系统的特殊观察与操作</h3>
+
+<ul>
+  <li>boot sector 与 superblock 的关系</li>
+  <li>磁盘空间之浪费问题</li>
+  <li>利用 GNU 的 parted 进行分割行为</li>
+</ul>
+
+<h3 id="重点回顾">重点回顾</h3>
+
+<ul>
+  <li>
+    <p>基本上 Linux 的正统文件系统为 Ext2 ，该文件系统内的信息主要有：</p>
+  </li>
+  <li>superblock：记录此 filesystem 的整体信息，包括inode/block的总量、使用量、剩余量， 以及文件系统的格式与相关信息等；</li>
+  <li>inode：记录文件的属性，一个文件占用一个inode，同时记录此文件的数据所在的 block 号码；</li>
+  <li>
+    <p>block：实际记录文件的内容，若文件太大时，会占用多个 block 。</p>
+  </li>
+  <li>Ext2 文件系统的数据存取为索引式文件系统(indexed allocation)</li>
+  <li>需要碎片整理的原因就是文件写入的 block 太过于离散了，此时文件读取的效能将会变的很差所致。 这个时候可以透过碎片整理将同一个文件所属的 blocks 汇整在一起。</li>
+  <li>Ext2文件系统主要有：boot sector, superblock, inode bitmap, block bitmap, inode table, data block 等六大部分。</li>
+  <li>data block 是用来放置文件内容数据地方，在 Ext2 文件系统中所支持的 block 大小有 1K, 2K 及 4K 三种而已</li>
+  <li>inode 记录文件的属性/权限等数据，其他重要项目为： 每个 inode 大小均固定为 128 bytes； 每个文件都仅会占用一个 inode 而已； 因此文件系统能够创建的文件数量与 inode 的数量有关；</li>
+  <li>文件的 block 在记录文件的实际数据，目录的 block 则在记录该目录底下文件名与其 inode 号码的对照表；</li>
+  <li>日志式文件系统 (journal) 会多出一块记录区，随时记载文件系统的主要活动，可加快系统复原时间；</li>
+  <li>Linux 文件系统为添加效能，会让主存储器作为大量的磁盘高速缓存；</li>
+  <li>实体链接只是多了一个文件名对该 inode 号码的链接而已；</li>
+  <li>符号链接就类似Windows的快捷方式功能。</li>
+  <li>磁盘的使用必需要经过：分割、格式化与挂载，分别惯用的命令为：fdisk, mkfs, mount三个命令</li>
+  <li>启动自动挂载可参考/etc/fstab之配置，配置完毕务必使用 mount -a 测试语法正确否；</li>
+</ul>
+
+<h3 id="参考资料">参考资料</h3>
+<ul>
+  <li><a href="http://vbird.dic.ksu.edu.tw/linux_basic/0230filesystem.php#harddisk">鸟哥的Linux私房菜 第八章</a></li>
+</ul>
+
+<hr />
+:ET

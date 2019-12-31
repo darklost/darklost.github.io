@@ -1,0 +1,109 @@
+I"�4<p>用LaTeX beamer制作幻灯片简洁优美，在需要很多数学公式的情况下很实用。这里我用我的第一份LaTeX beamer幻灯片代码为例说明。学习使用任何一种语言编程时，最重要的是对整个代码框架的理解，本文重点讲框架。</p>
+
+<h3 id="代码框架理解">代码框架理解</h3>
+
+<p>beamer制作幻灯片的框架大致可分三级（其中for语句仅为便于理解，实际的LaTeX语句中并不会出现）如下：</p>
+
+<ul>
+  <li>定义文件类型</li>
+  <li>放入所有需要使用的主题和包</li>
+  <li>总的开始
+    <ul>
+      <li>编辑幻灯片首页</li>
+      <li>for i = 1,2,…,N
+        <ul>
+          <li>开始编辑第i张幻灯片</li>
+          <li>结束编辑第i张幻灯片</li>
+        </ul>
+      </li>
+      <li>end for</li>
+    </ul>
+  </li>
+  <li>总的结束</li>
+</ul>
+
+<h3 id="一级结构代码">一级结构代码</h3>
+
+<p>具体从代码看，首先是一级结构：</p>
+
+<div class="language-tex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">\documentclass</span><span class="na">[xcolor=dvipsnames]</span><span class="p">{</span>beamer<span class="p">}</span>  <span class="c">%定义文件类型</span>
+<span class="k">\usetheme</span><span class="p">{</span>Copenhagen<span class="p">}</span>                      <span class="c">%此句及以下是我使用的主题和包</span>
+<span class="k">\usecolortheme</span><span class="p">{</span>wolverine<span class="p">}</span>                       <span class="c">%颜色主题</span>
+<span class="k">\usepackage</span><span class="p">{</span>utopia<span class="p">}</span>                             <span class="c">%字体</span>
+<span class="k">\usecolortheme</span><span class="na">[named=brown]</span><span class="p">{</span>structure<span class="p">}</span>          <span class="c">%改变主题内嵌结构的颜色</span>
+<span class="k">\usepackage</span><span class="p">{</span>CJK<span class="p">}</span>                                <span class="c">%中文包，如果全部英文可以不用</span>
+
+<span class="nt">\begin{document}</span>                           <span class="c">%总的开始</span>
+
+<span class="nt">\end{document}</span>                             <span class="c">%总的结束</span>
+</code></pre></div></div>
+
+<h3 id="二级结构代码">二级结构代码</h3>
+
+<p>在<code class="highlighter-rouge">总的开始</code>与<code class="highlighter-rouge">总的结束</code>之间写入如下代码，是二级结构：</p>
+
+<div class="language-tex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">\title</span><span class="na">[幻灯片缩略名]</span><span class="p">{</span>幻灯片全名<span class="p">}</span>           <span class="c">%以下是幻灯片首页的编辑</span>
+<span class="k">\subtitle</span><span class="p">{</span>副标题<span class="p">}</span>
+<span class="k">\author</span><span class="p">{</span>作者姓名<span class="p">}</span>
+<span class="k">\institute</span><span class="p">{</span>作者所属学校<span class="p">}</span>
+<span class="k">\date</span><span class="na">[\initclock\tdtime]</span><span class="p">{</span><span class="k">\today</span><span class="p">}</span>                     <span class="c">%总是显示当前的日期</span>
+<span class="k">\logo</span><span class="p">{</span><span class="k">\includegraphics</span><span class="na">[height=10mm]</span><span class="p">{</span>yellowdeer.jpg<span class="p">}}</span> <span class="c">%这是我的logo，如果不需要删掉词句即可</span>
+<span class="nt">\begin{frame}</span>
+<span class="k">\titlepage</span>
+<span class="nt">\end{frame}</span>                                <span class="c">%幻灯片首页的编辑到此结束</span>
+
+<span class="nt">\begin{frame}</span>                              <span class="c">%开始编辑第i张幻灯片</span>
+
+<span class="nt">\end{frame}</span>                                <span class="c">%结束编辑第i张幻灯片</span>
+
+</code></pre></div></div>
+
+<h3 id="三级结构代码">三级结构代码</h3>
+
+<p>在<code class="highlighter-rouge">开始编辑第i张幻灯片</code>与<code class="highlighter-rouge">结束编辑第i张幻灯片</code>之间，写入第i张幻灯片的编辑代码，即三级结构。
+这里我以如下图所示的幻灯片的编辑代码为例说明一些基本的、常用的语法：</p>
+
+<p><img src="/public/img/slide_eg.JPG" alt="slide_eg" /></p>
+
+<div class="language-tex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">\begin{frame}</span><span class="p">{</span>Decentralized low-rank matrix completion problem<span class="p">}</span>  <span class="c">%大括号中是这页幻灯片的标题</span>
+<span class="nt">\begin{columns}</span>[onlytextwidth]                                   <span class="c">%将幻灯片分为两栏</span>
+<span class="nt">\begin{column}</span><span class="p">{</span>0.4<span class="k">\textwidth</span><span class="p">}</span>                                    <span class="c">%开始左边的一栏，该栏占宽比为40%</span>
+<span class="k">\includegraphics</span><span class="na">[height=40mm]</span><span class="p">{</span>networki2.jpg<span class="p">}</span>                     <span class="c">%插入图片，图片大小可通过高度自定义</span>
+<span class="nt">\begin{itemize}</span>                                                  <span class="c">%开始列出清单</span>
+<span class="k">\footnotesize</span> <span class="k">\item</span> A network of <span class="p">$</span><span class="nb">L</span><span class="p">$</span> agents<span class="k">\\</span>                    <span class="c">%清单第一项。其中\footnotesize控制字体大小</span>
+<span class="k">\item</span> Each agent <span class="p">$</span><span class="nb">i</span><span class="p">$</span> observes some entries of <span class="p">$</span><span class="nv">\mathbf</span><span class="p">{</span><span class="nb">W</span><span class="p">}_{</span><span class="nb">i</span><span class="p">}$</span>   <span class="c">%清单第二项</span>
+<span class="nt">\end{itemize}</span>                                                    <span class="c">%结束列出清单</span>
+<span class="nt">\end{column}</span>                                                     <span class="c">%结束左边的这栏</span>
+<span class="nt">\begin{column}</span><span class="p">{</span>0.6<span class="k">\textwidth</span><span class="p">}</span>                                    <span class="c">%开始右边的一栏，与左栏类似</span>
+<span class="nt">\begin{itemize}</span>
+<span class="k">\vbox</span><span class="p">{}</span>                                                          <span class="c">%空一行</span>
+<span class="k">\item</span> Consider a low-rank matrix <span class="p">$</span><span class="nv">\mathbf</span><span class="p">{</span><span class="nb">W</span><span class="p">}$</span>
+<span class="k">\scriptsize</span> <span class="nt">\begin{itemize}</span>
+                   <span class="k">\item</span> <span class="p">$</span><span class="nv">\mathbf</span><span class="p">{</span><span class="nb">W</span><span class="p">}</span><span class="nb"> </span><span class="nv">\in</span><span class="nb"> </span><span class="nv">\mathbb</span><span class="p">{</span><span class="nb">R</span><span class="p">}^{</span><span class="nb">N </span><span class="nv">\times</span><span class="nb"> M</span><span class="p">}$</span>
+                   <span class="k">\item</span> <span class="p">$</span><span class="nb">rank</span><span class="o">(</span><span class="nv">\mathbf</span><span class="p">{</span><span class="nb">W</span><span class="p">}</span><span class="o">)</span><span class="nv">\le</span><span class="nb"> r</span><span class="p">$</span>
+                   <span class="k">\item</span> <span class="p">$</span><span class="nv">\mathbf</span><span class="p">{</span><span class="nb">W</span><span class="p">}_{</span><span class="nb">n,m</span><span class="p">}$</span> is known for <span class="p">$</span><span class="o">(</span><span class="nb">n,m</span><span class="o">)</span><span class="nb"> </span><span class="nv">\in</span><span class="nb"> </span><span class="nv">\Omega</span><span class="p">$</span>
+                   <span class="k">\item</span> <span class="p">$</span><span class="nv">\mathbf</span><span class="p">{</span><span class="nb">W</span><span class="p">}</span><span class="nb"> </span><span class="o">=</span><span class="nb"> </span><span class="o">[</span><span class="nv">\mathbf</span><span class="p">{</span><span class="nb">W</span><span class="p">}_{</span><span class="m">1</span><span class="p">}</span><span class="nb">, </span><span class="nv">\mathbf</span><span class="p">{</span><span class="nb">W</span><span class="p">}_{</span><span class="m">2</span><span class="p">}</span><span class="nb">, ...,
+</span><span class="nv">\mathbf</span><span class="p">{</span><span class="nb">W</span><span class="p">}_{</span><span class="nb">L</span><span class="p">}</span><span class="o">]</span><span class="nb"> </span><span class="p">$</span>
+                 <span class="nt">\end{itemize}</span>
+<span class="k">\normalsize</span> <span class="k">\vbox</span><span class="p">{}</span>
+<span class="k">\item</span> An estimate matrix of <span class="p">$</span><span class="nv">\mathbf</span><span class="p">{</span><span class="nb">W</span><span class="p">}$</span>: <span class="p">$</span><span class="nv">\mathbf</span><span class="p">{</span><span class="nb">Z</span><span class="p">}$</span>
+<span class="k">\scriptsize</span> <span class="nt">\begin{itemize}</span>
+                <span class="k">\item</span> <span class="p">$</span><span class="nv">\mathbf</span><span class="p">{</span><span class="nb">Z</span><span class="p">}</span><span class="nb"> </span><span class="nv">\in</span><span class="nb"> </span><span class="nv">\mathbb</span><span class="p">{</span><span class="nb">R</span><span class="p">}^{</span><span class="nb">N </span><span class="nv">\times</span><span class="nb"> M</span><span class="p">}$</span>
+                <span class="k">\item</span> <span class="p">$</span><span class="nb">rank</span><span class="o">(</span><span class="nv">\mathbf</span><span class="p">{</span><span class="nb">Z</span><span class="p">}</span><span class="o">)</span><span class="nv">\le</span><span class="nb"> r</span><span class="p">$</span>
+                <span class="k">\item</span> <span class="p">$</span><span class="nv">\mathbf</span><span class="p">{</span><span class="nb">Z</span><span class="p">}</span><span class="o">=</span><span class="nv">\mathbf</span><span class="p">{</span><span class="nb">X</span><span class="p">}</span><span class="nv">\mathbf</span><span class="p">{</span><span class="nb">Y</span><span class="p">}</span><span class="o">=</span><span class="nb"> </span><span class="nv">\mathbf</span><span class="p">{</span><span class="nb">X</span><span class="p">}</span><span class="nb"> </span><span class="o">[</span><span class="nv">\mathbf</span><span class="p">{</span><span class="nb">Y</span><span class="p">}_{</span><span class="m">1</span><span class="p">}</span><span class="nb">, </span><span class="nv">\mathbf</span><span class="p">{</span><span class="nb">Y</span><span class="p">}_{</span><span class="m">2</span><span class="p">}</span><span class="nb">, ..., </span><span class="nv">\mathbf</span><span class="p">{</span><span class="nb">Y</span><span class="p">}_{</span><span class="nb">L</span><span class="p">}</span><span class="o">]</span><span class="p">$</span>
+                <span class="k">\item</span> <span class="p">$</span><span class="nv">\mathbf</span><span class="p">{</span><span class="nb">X</span><span class="p">}</span><span class="nv">\in</span><span class="nb"> </span><span class="nv">\mathbb</span><span class="p">{</span><span class="nb">R</span><span class="p">}^{</span><span class="nb">N </span><span class="nv">\times</span><span class="nb"> r</span><span class="p">}</span><span class="nb">,</span><span class="nv">\mathbf</span><span class="p">{</span><span class="nb">Y</span><span class="p">}</span><span class="nb"> </span><span class="nv">\in</span><span class="nb"> </span><span class="nv">\mathbb</span><span class="p">{</span><span class="nb">R</span><span class="p">}^{</span><span class="nb">r </span><span class="nv">\times</span><span class="nb"> M</span><span class="p">}$</span>
+              <span class="nt">\end{itemize}</span>
+<span class="nt">\end{itemize}</span>
+<span class="k">\normalsize</span> <span class="k">\vbox</span><span class="p">{}</span>                                             <span class="c">%\normalize使字体恢复正常大小</span>
+<span class="nt">\end{column}</span>                                                    <span class="c">%结束右边栏</span>
+<span class="nt">\end{columns}</span>                                                   <span class="c">%结束分栏</span>
+<span class="nt">\end{frame}</span>
+</code></pre></div></div>
+
+<p>以上就是LaTex beamer制作幻灯片的主要内容。
+再次强调，在理解细节之前应先对代码框架有一个大的把握，具体编辑所需的语句可查阅书籍或互联网。</p>
+
+<p>其实一句话就可以概括啦：不断的begin，不断的end。</p>
+
+<hr />
+:ET

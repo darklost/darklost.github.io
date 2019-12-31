@@ -1,0 +1,381 @@
+I"�[<p>由于工作接触cocos2d-x的缘故，接触到了luabinding。对luabinding的理解在一定程度上会加深对框架的理解（也包括quick的lua绑定），在学习的过程中便涉及到了tolua++。
+***
+tolua++是tolua的扩展版本，是一款能够集成C/C++与lua代码的工具。在面向C++方面，tolua++包含了一些新的特性比如：</p>
+<ol>
+  <li>支持<code class="highlighter-rouge">std::string</code>作为基本类型（这个可以由一个命令行选项关闭）</li>
+  <li>支持类模板</li>
+  <li>以及其他的特性还有一些bug的修复。</li>
+</ol>
+
+<p><code class="highlighter-rouge">tolua</code>这款工具，极大的简化了C/C++代码与lua代码的集成。基于一个干净的头文件（或者从实际头文件中提取）, tolua会自动生成从lua访问C/C++功能的绑定代码。</p>
+
+<p>##tolua如何工作
+要使用tolua，我们需要创建一个package文件（译者注：pkg文件），即一个从C/C++实际头文件整理后的头文件，列举出我们想导出到lua环境中的那些常量、变量、函数、类以及方法。然后tolua会解析该文件并且创建自动绑定C/C++代码到lua的C/C++文件。如果将创建的文件同我们的应用链接起来，我们就可以从lua中访问指定的C/C++代码。
+我们从一些例子开始。如果我们指定下面的类似C头文件作为输入给tolua：</p>
+
+<pre><code class="language-C++">
+#define FALSE 0
+#define TRUE 1
+enum { 
+ POINT = 100, 
+ LINE, 
+ POLYGON
+}
+Object* createObejct (int type);
+void drawObject (Object* obj, double red, double green, double blue);
+int isSelected (Object* obj);
+
+</code></pre>
+
+<p>就会自动创建一个绑定上面代码到lua的C文件。因此，在lua代码里， 我们可以访问C代码。举个例子：</p>
+
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="o">...</span>
+<span class="n">myLine</span> <span class="o">=</span> <span class="n">createObject</span><span class="p">(</span><span class="n">LINE</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="k">if</span> <span class="n">isSelected</span><span class="p">(</span><span class="n">myLine</span><span class="p">)</span> <span class="o">==</span> <span class="n">TRUE</span> <span class="k">then</span>
+  <span class="n">drawObject</span><span class="p">(</span><span class="n">myLine</span><span class="p">,</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
+<span class="k">else</span>
+  <span class="n">drawObject</span><span class="p">(</span><span class="n">myLine</span><span class="p">,</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
+<span class="k">end</span>
+<span class="o">...</span>
+
+</code></pre></div></div>
+
+<p>另外，考虑下面类似C++头文件</p>
+
+<pre><code class="language-C++">
+#define FALSE 0
+#define TRUE 1
+class Shape
+{
+  void draw (void);
+  void draw (double red, double green, double blue);
+  int isSelected (void);
+};
+class Line : public Shape
+{
+ Line (double x1, double y1, double x2, double y2);
+ ~Line (void);
+};
+
+</code></pre>
+
+<p>如果tolua输入加载该文件，就会自动生成一个C++文件，从而为我们提供lua层访问C++层所需要的对应的代码。因此，以下的的lua代码是有效的：</p>
+
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="o">...</span>
+<span class="n">myLine</span> <span class="o">=</span> <span class="n">Line</span><span class="p">:</span><span class="n">new</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="k">if</span> <span class="n">myLine</span><span class="p">:</span><span class="n">isSelected</span><span class="p">()</span> <span class="o">==</span> <span class="n">TRUE</span> <span class="k">then</span>
+ <span class="n">myLine</span><span class="p">:</span><span class="n">draw</span><span class="p">(</span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">else</span>
+ <span class="n">myLine</span><span class="p">:</span><span class="n">draw</span><span class="p">()</span>
+<span class="k">end</span>
+<span class="o">...</span>
+<span class="n">myLine</span><span class="p">:</span><span class="n">delete</span><span class="p">()</span>
+<span class="o">...</span>
+
+</code></pre></div></div>
+
+<p>传给tolua的package文件并不是真正的C/C++头文件，而是清理过的版本。tolua并没有实现对C/C++代码的完全解析，但是却能够解析暴露给lua的功能的声明。通常头文件可以被包括进package文件里，tolua将会提取出用户指定的代码以用于解析头文件。</p>
+
+<p>##如何使用tolua
+tolua由两部分代码组成：可执行程序和静态库（an executable and a library）。可执行程序用于解析，读入package文件，然后输出C/C++代码，该代码提供了从lua层访问C/C++层的绑定。如果package文件是与C++类似的代码（例如包括类的定义），就会生成一份C++代码。如果package文件是与C类似的代码（例如不包括类），就会生成一份C代码。tolua可接受一些选项。运行tolua -h显示当前可接受的选项。例如，要解析一个名为myfile.pkg生成一个名为myfile.c的绑定代码，我们需要输入：</p>
+
+<p><code class="highlighter-rouge">tolua -o myfile.c myfile.pkg</code></p>
+
+<p>产生的代码必须被编译并且和应用程序进行链接，才能提供给Lua进行访问。每个被解析的文件代表导出到lua的package。默认情况下，package的名称就是是输入文件的根名称（例子中为myfile），用户可以指定一个不同的名称给package：</p>
+
+<p><code class="highlighter-rouge">tolua -n pkgname -o myfile.c myfile.pkg</code></p>
+
+<p>package还应当被明确初始化。为了从C/C++代码中初始化package，我们需要声明和调用初始化函数。初始化函数被定义为：</p>
+
+<pre><code class="language-C++">
+int tolua_pkgname_open (lua_State*);
+
+</code></pre>
+
+<p>其中pkgname是被绑定package的名字。如果我们使用的是C++，我们可以选择自动初始化：</p>
+
+<p><code class="highlighter-rouge">tolua -a -n pkgname -o myfile.c myfile.pkg</code></p>
+
+<p>在这种情况下，初始化函数会被自动调用。然而，如果我们计划使用多个Lua State，自动初始化就行不通了，因为静态变量初始化的顺序在C++里没有定义。</p>
+
+<p>tolua生成的绑定代码使用了一系列tolua库里面的函数。因此，这个库同样需要被链接到应用程序中。tolua.h也是有必须要编译生成的代码。
+应用程序无需绑定任何package文件也可以使用tolua的面向对象框架。在这种情况下，应用程序必须调用tolua初始化函数（此函数被任何package文件初始化函数调用）：</p>
+
+<pre><code class="language-C++">
+int tolua_open (void);
+
+</code></pre>
+<p>###基本概念
+使用tolua的第一步就是创建package文件。我们从真正的头文件入手，将想要暴露给lua的特性转换成tolua可以理解的格式。tolua能够理解的格式就是一些简单的C/C++声明。我们从下面几个方面来讨论：
+文件包含
+一个package文件可以包含另外的package文件。一般格式是：</p>
+<blockquote>
+  <p>$pfile “include_file”</p>
+</blockquote>
+
+<p>一个package文件也可以包含常规的C/C++头文件，使用hfile或者cfile命令：</p>
+
+<blockquote>
+  <p>$cfile “example.h”</p>
+</blockquote>
+
+<p>在这种情况下，tolua将会提取出被tolua_begin和tolua_end所封闭的代码，或者tolua_export所在的单行。以下面C++代码为例：</p>
+
+<pre><code class="language-C++">
+#ifndef EXAMPLE_H
+#define EXAMPLE_H
+class Example { // tolua_export
+private:
+	string name;
+	int number;
+public:
+	void set_number(int number);
+	//tolua_begin
+	string get_name();
+	int get_number();
+};
+// tolua_end
+#endif
+
+</code></pre>
+
+<p>在这个例子中，不被tolua支持的代码（类的私有部分），还有set_number函数被留在了package文件之外。
+最后，lua文件可以被包含进package文件中，使用$lfile:</p>
+
+<blockquote>
+  <p>$lfile “example.lua”</p>
+</blockquote>
+
+<p>tolua++新特性：从tolua++1.0.4版本以后，还有一种方式来包含源文件就是用ifile:</p>
+
+<blockquote>
+  <p>$ifile “filename”</p>
+</blockquote>
+
+<p>ifile允许在文件名之后附带额外的可选的参数，举个例子：</p>
+
+<p><code class="highlighter-rouge">$ifile "widget.h", GUI</code>
+<code class="highlighter-rouge">$ifile "vector.h", math, 3d</code></p>
+
+<p>ifile默认会将整个文件原封不动的包含进去，但是文件的内容和额外的参数通过include_file_hook函数才能被包含进package文件中。</p>
+
+<h4 id="基本类型">基本类型:</h4>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tolua会自动映射C/C++的基本类型到lua的基本类型。	
+char,int,float和double类型被映射为lua中的number	
+char * 被映射为lua中的string	
+void * 被映射为lua中的userdata	
+C/C++中的数据类型前面可能有修饰语（如unsigned, static,short, const等等）。然而我们要注意到tolua会忽略基本类型前面的修饰语const。因此，我们给lua传递一个基本类型常量然后再从lua中传递回给C/C++代码，常量到非常量的转换会被悄悄的完成。
+C/C++函数也可以对lua对象进行明确的操作。lua_Object被认为是一个基本类型，任何lua值都符合。
+
+</code></pre></div></div>
+
+<p><strong>tolua++新特性：</strong></p>
+
+<p>C++中的string类型同样被认为是基本类型，会被当作值传递给lua(使用c_str()方法)。这个功能可以使用命令行选项-S进行关闭。</p>
+<h4 id="用户自定义类型">用户自定义类型</h4>
+
+<p>在package文件里的所有其他类型都会被认为是用户自定义类型。它们会映射到lua的userdata类型。lua只能存储指向用户自定义类型的指针；但是，tolua会自动采取措施来处理引用和值。例如，如果一个函数或方法返回一个用户定义类型的值，当这个值返回给lua的时候，tolua会分配一个克隆对象，同时会设置垃圾收集标记，以便在lua不再使用该对象时会自动释放。</p>
+
+<p>对于用户定义类型，常量是被保留的，因此将用户自定义类型的非常量作为常量传递给一个函数时，会产生类型不匹配的错误。</p>
+
+<h4 id="null和nil">NULL和nil</h4>
+
+<p>C/C++的NULL或0指针映射到lua中的nil类型。反之，nil却可以被指定为任何C/C++指针类型。这对任何类型都有效：char * , void * 以及用户自定义类型指针。</p>
+
+<h4 id="typedefs">Typedefs</h4>
+
+<p>真实头文件的包含</p>
+
+<h4 id="绑定常量">绑定常量</h4>
+
+<p>tolua支持两种绑定常量的方式：<code class="highlighter-rouge">define</code>和<code class="highlighter-rouge">enum</code>。</p>
+
+<p><code class="highlighter-rouge">define</code>通常的格式是：<code class="highlighter-rouge">#define NAME [ VALUE ]</code></p>
+
+<p>上面的VALUE是可选的。如果这样的代码出现在被解析的文件中，tolua会将NAME作为lua的全局变量，该全局变量是C/C++的常量，值为VALUE。这里只接受数字常量。</p>
+
+<p>tolua++新特性：所有的其他预处理指令会被忽略。
+<code class="highlighter-rouge">enum</code>的一般格式：</p>
+
+<pre><code class="language-C++">
+enum {
+  NAME1 [ = VALUE1 ] ,
+  NAME2 [ = VALUE2 ] ,
+  ...
+  NAMEn [ = VALUEn ]
+};
+
+</code></pre>
+
+<p>同样的，tolua会创建一系列全局变量，命名为NAMEi，对应着各自的值。</p>
+
+<h4 id="绑定外部变量">绑定外部变量</h4>
+<p><strong>tolua++的额外特性</strong></p>
+
+<p>多个变量声明	
+同一类型的多个变量可以一次性声明，如:	
+<code class="highlighter-rouge">float x,y,z;</code>
+这将会创建3个不同的浮点型变量。确保逗号之间没有任何空格，否则会解析错误。	
+<code class="highlighter-rouge">tolua_readonly</code>	
+任何变量声明都可以使用tolua_readonly修饰符来确保变量只读，即使该变量为非常量类型。例如：</p>
+<pre><code class="language-C++">class Widget {
+	tolua_readonly string name;
+};
+</code></pre>
+<p>这个特性可以用来’hack’一些不支持的东西如operator-&gt;。考虑下面这个pkg文件：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$hfile "node.h"
+$#define __operator_arrow operator-&gt;()
+$#define __get_name get_name()
+</code></pre></div></div>
+
+<p>node.h文件内容如下：</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">template</span> <span class="k">class</span><span class="err">&lt;</span><span class="nc">T</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">Node</span> <span class="p">{</span> <span class="c1">// tolua_export</span>
+<span class="nl">private:</span>
+	<span class="n">string</span> <span class="n">name</span><span class="p">;</span>
+	<span class="n">T</span><span class="o">*</span> <span class="n">value</span><span class="p">;</span>
+<span class="nl">public:</span>
+	<span class="n">T</span><span class="o">*</span> <span class="k">operator</span><span class="o">-&gt;</span><span class="p">()</span> <span class="p">{</span><span class="k">return</span> <span class="n">value</span><span class="p">;};</span>
+	<span class="n">string</span> <span class="n">get_name</span><span class="p">()</span> <span class="p">{</span><span class="k">return</span> <span class="n">name</span><span class="p">;};</span>
+	<span class="c1">// tolua_begin</span>
+	<span class="c">#if 0
+	TOLUA_TEMPLATE_BIND(T, Vector3D)
+	tolua_readonly __operator_arrow @ p;
+	tolua_readonly __get_name @ name;
+	#endif
+</span>	<span class="n">Node</span><span class="o">*</span> <span class="n">next</span><span class="p">;</span>
+	<span class="n">Node</span><span class="o">*</span> <span class="n">prev</span><span class="p">;</span>
+	<span class="kt">void</span> <span class="n">set_name</span><span class="p">(</span><span class="n">string</span> <span class="n">p_name</span><span class="p">)</span> <span class="p">{</span><span class="n">name</span> <span class="o">=</span> <span class="n">p_name</span><span class="p">;};</span>
+	<span class="n">Node</span><span class="p">();</span>
+<span class="p">};</span>
+<span class="c1">// tolua_end</span>
+</code></pre></div></div>
+
+<p>虽然这样对头文件的处理不是很漂亮，但是却解决了下面几个问题：	
+<code class="highlighter-rouge">operator-&gt;()</code>方法可以通过在lua中使用对象的变量p来调用	
+<code class="highlighter-rouge">get_name()</code>方法可以通过在lua中使用对象的变量name来调用	
+lua用法举例：</p>
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">node</span> <span class="o">=</span> <span class="n">Node_Vector3D_</span><span class="p">:</span><span class="n">new_local</span><span class="p">()</span>	
+<span class="c1">-- do something with the node here --	</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"node name is "</span><span class="o">..</span><span class="n">node</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>	
+<span class="nb">print</span><span class="p">(</span><span class="s2">"node value is "</span><span class="o">..</span> <span class="n">node</span><span class="p">.</span><span class="n">p</span><span class="p">.</span><span class="n">x</span> <span class="o">..</span><span class="s2">", "</span><span class="o">..</span> <span class="n">node</span><span class="p">.</span><span class="n">p</span><span class="p">.</span><span class="n">y</span> <span class="o">..</span><span class="s2">", "</span><span class="o">..</span> <span class="n">node</span><span class="p">.</span><span class="n">p</span><span class="p">.</span><span class="n">z</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>tolua++会忽略掉所有的预处理命令（除了#define), 但node.h仍然是一个有效的C++头文件，同时也是tolua的一个有效的源，这样就避免了维护2个不同的文件，即使是具有不一样的功能的对象。</p>
+
+<p>像变量一样去重命名函数的功能特性可能会被扩展进将来的版本中。	
+在命令行中定义值	
+从版本1.0.92开始，命令行选项-E在tolua++运行的时候允许我们传值给luaState，就像GCC的-D一样。例如：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ tolua++ -E VERSION=5.1 -E HAVE_ZLIB package.pkg &gt; package_bind.cpp
+</code></pre></div></div>
+<p>上述命令将会在全局表_extra_parameters中添加两个字段，字符串值为“5.1”的“VERSION”，还有布尔值为true的“HAVE_ZLIB”。就目前而言，我们还不能使用这些值，除非用户自定义脚本。
+使用C++ typeid
+从版本1.0.92开始，命令行选项-t变得可用。这将会产生一个对空宏Mtolua_typeid的调用的列表，该列表包含了C++ type_infoobject和区分其他类型的名字。例如，如果你的package文件中绑定了2个类，Foo和Bar,使用-t会有如下输出：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#ifndef Mtolua_typeid
+#define Mtolua_typeid(L,TI,T)
+#endif
+ Mtolua_typeid(tolua_S,typeid(Foo), "Foo");
+ Mtolua_typeid(tolua_S,typeid(Bar), "Bar");
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">Mtolua_typename</code>的自行实现。
+导出实用函数
+tolua本身为lua导出了一些实用的函数，包括了面向对象的框架。tolua使用的package文件如下：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module tolua 
+{ 
+ char* tolua_bnd_type @ type (lua_Object lo); 
+ void tolua_bnd_takeownership @ takeownership (lua_Object lo); 
+ void tolua_bnd_releaseownership @ releaseownership (lua_Object lo); 
+ lua_Object tolua_bnd_cast @ cast (lua_Object lo, char* type); 
+ void tolua_bnd_inherit @ inherit (lua_Object table, lua_Object instance);
+/* for lua 5.1 */ 
+ void tolua_bnd_setpeer @ setpeer (lua_Object object, lua_Object peer_table); 
+ void tolua_bnd_getpeer @ getpeer (lua_Object object); 
+}
+tolua.type(var)
+</code></pre></div></div>
+
+<p>返回一个代表对象类型的字符串。例如，tolua.type(tolua)返回字符串table, tolua.type(tolua.type)返回cfunction。类似的，如果var是一个存储着用户自定义类型T的变量，tolua.type(var)将会返回const T或者T, 取决于它是否是一个常量引用。</p>
+
+<p><strong><em>tolua.takeownership(var)</em></strong></p>
+
+<p>接管对象引用变量的所有权，意味着当对象的所有引用都没有的话，对象本身将会被lua删除。</p>
+
+<p><strong><em>tolua.releaseownership(var)</em></strong></p>
+
+<p>释放对象引用变量的所有权。</p>
+
+<p><strong><em>tolua.cast(var, type)</em></strong></p>
+
+<p>改变var的元表以便使得它成为type类型。type须是一个完整的C类型对象（包括命名空间等）字符串。</p>
+
+<p><strong><em>tolua.inherit(table, var)</em></strong></p>
+
+<p>（tolua++新特性）tolua++会将table作为对象和var具有一样的类型，当必要的时候使用var。举个例子，考虑下这个方法：</p>
+
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">void</span> <span class="n">set_parent</span><span class="p">(</span><span class="n">Widget</span><span class="o">*</span> <span class="n">p_parent</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>一个lua对象可以这么使用：</p>
+
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">local</span> <span class="n">w</span> <span class="o">=</span> <span class="n">Widget</span><span class="p">()</span>
+<span class="kd">local</span> <span class="n">lua_widget</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">tolua</span><span class="p">.</span><span class="n">inherit</span><span class="p">(</span><span class="n">lua_widget</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+<span class="n">set_parent</span><span class="p">(</span><span class="n">lua_widget</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>注意这只是使得table能够在必要的时候被识别为Widget类型。为了能够访问Widget的方法，你必须要实现你自己的对象系统。下面是个简单的例子：</p>
+
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">lua_widget</span><span class="p">.</span><span class="n">show</span> <span class="o">=</span> <span class="n">Widget</span><span class="p">.</span><span class="n">show</span>
+<span class="n">lua_widget</span><span class="p">:</span><span class="n">show</span><span class="p">()</span> 
+
+<span class="c1">-- 调用Widget的show方法	</span>
+<span class="c1">-- table作为self，因为 lua_widget继承于一个widget实例</span>
+<span class="c1">-- tolua++会把self识别为Widget，并且调用方法</span>
+</code></pre></div></div>
+
+<p>当然，一个更好的办法就是为lua对象增加__index元方法。</p>
+<h3 id="嵌入lua代码">嵌入Lua代码</h3>
+<p>tolua允许我们将lua代码嵌入到生成的C/C++代码中。要做到这一点，它对指定的lua代码进行编译，并且在生成的代码中产生一个C常量字符串，存储下来相应的字节码。当package文件被打开的时候，字符串被执行。嵌入的lua代码格式如下：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$[
+嵌入的lua代码	
+...	
+$]	
+
+</code></pre></div></div>
+<p>以下面的.pkg摘录为例：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-- Bind a Point class 
+class Point 	
+{ 	
+ Point (int x, int y); 	
+ ~Point (); 
+ void print (); 
+ ... 
+} CPoint;	
+
+-- Create a Point constructor 
+function Point (self) 
+ local cobj = CPoint:new(self.x or 0, self.y or 0) 
+ tolua.takeownership(cobj) 
+ return cobj 
+end
+$]
+--绑定这样的代码之后，我们可以在lua中这么写：
+
+p = Point{ x=2, y=3 } 
+p:print() 
+</code></pre></div></div>
+<hr />
+:ET

@@ -1,0 +1,68 @@
+I"�<p><strong>一需要的安装包</strong>：</p>
+
+<p>jdk ,adt-bundle, ndkr8+, python2.7, cocos2d-x-2.2.3;</p>
+
+<p><strong>二，全局环境配置</strong></p>
+
+<p>1.安装pythone,path 中添加如 C:\Python\;的安装路径 cmd python.exe 测试</p>
+
+<p>2.解压NDK 3. cocos2d-x2.2.3 adt-bundle</p>
+
+<p>3.打开Eclipse  指定NDK路径:windows- preferences-android-NDK;</p>
+
+<p>4.添加cocos2d-x 源码link路径</p>
+
+<p>5.添加c/c++环境变量</p>
+
+<p>COCOS2DX = D:\devtool\cocos2d-x-2.2.3</p>
+
+<p>NDK_ROOT= NDK解压路径</p>
+
+<p>NDK_BUILD_WIN= ${NDK_ROOT}\ndk-build.cmd</p>
+
+<p>NDK_MODULE_PATH= D:\devtool\cocos2d-x-2.2.3;D:\devtool\cocos2d-x-2.2.3\cocos2dx\platform\third_party\android\prebuilt;(注：可以用相对路径COCOS2DX;COCOS2DX \cocos2dx\platform\third_party\android\prebuilt;)</p>
+
+<p><strong>三，创建项目</strong></p>
+
+<p>静茹cocos2d-x 目录</p>
+
+<p>cocos2d-x-2.2.3\tools\project-creator</p>
+
+<p>shift+鼠标右键—-在此处运行命令窗口</p>
+
+<p>运行 create_project.py 根据提示创建 项目，</p>
+
+<p>项目路径位于cocosd-x 目录的projects目录下</p>
+
+<p>eclipse 导入android项目；</p>
+
+<p><strong>四，项目环境配置</strong></p>
+
+<p>右键导入的cocos2d-x 项目 propeties</p>
+
+<p>C/C++ build  将build command 改为 ${NDK_BUILD_WIN}</p>
+
+<p>打开C/C++编译器</p>
+
+<p>查看include</p>
+
+<p>将无法打开的在paths and Symbols 中将无法找到的在你当前的NDK和cocos2d中找到当前版本（不指定不影响编译，影响快捷提示和Eclipse报错）</p>
+
+<p><strong>六，编译-</strong><strong>运行</strong></p>
+
+<p>android.mk 可以自己编写，也可以使用提供的通用的android.mk(位于lib目录下)</p>
+
+<p>需要时可以自己更改lib库的名字 （注意必须和java 中load 的名称对应）</p>
+
+<p>C/C++编译器可以右键项目 build project /clean project</p>
+
+<p>也可以在JAVA编译器 run android application project,编译后运行</p>
+
+<p>c代码编译过程在 console CDT GLOBAL BUILD CONSOLE</p>
+
+<p>小技巧：不影响编译的编译 其报错可以再如下途中选择忽略，建议改成warmming 避免没有代码错误提示</p>
+
+<p>喜欢vs 的可以在新建的项目中win32.project文件夹中的sln 文件</p>
+
+<hr />
+:ET

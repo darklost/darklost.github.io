@@ -1,0 +1,194 @@
+I"/<h3 id="命名空间宏">命名空间宏：</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>USING_NS_CC; // using namespace cocos2d
+
+NS_CC_BEGIN； //using namespace cocos2d{
+
+NS_CC_END; // }
+
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="判断一个精灵被点击">判断一个精灵被点击：</h3>
+
+<p>1、层要接收点击消息。2、回调函数中取得点击坐标。3、取得精灵用boudingBox().containsPoint函数判断。（或使用 convertTouchToNodeSpaceAR 方法）</p>
+
+<hr />
+
+<h3 id="多layer点击处理">多Layer点击处理：</h3>
+
+<p>1、使用ccTouchesBegan()。此函数返回true，表示中断消息链，本层接收消息；返回false则本层不接收消息。</p>
+
+<p>2、重写个Layer。大体思路是只有最底层的Layer接收消息，然后根据某种方式转发给各层。</p>
+
+<p>具体可参考文章：<a href="http://www.myexception.cn/operating-system/1118630.html">http://www.myexception.cn/operating-system/1118630.html</a> cocos2d-x 建立自己的层级窗口消息机制</p>
+
+<h3 id="精灵相关">精灵相关</h3>
+<hr />
+
+<p>精灵拉长：</p>
+
+<p>setScale() 尽量不用这样的变换，因为会模糊。</p>
+
+<hr />
+
+<p>精灵半透明：</p>
+
+<p>setOpacity() 设置半透明0~255 。</p>
+
+<hr />
+
+<p>精灵旋转：</p>
+
+<p>setRotation() 默认是Z轴旋转。</p>
+
+<p>setRotationX() X轴为对称轴旋转。</p>
+
+<p>setRotationY() Y轴为对称中心。</p>
+
+<hr />
+
+<p>精灵设定颜色：</p>
+
+<p>setColor() 。</p>
+
+<hr />
+
+<p>###动作相关</p>
+
+<p>相反的动作：</p>
+
+<p>reverse() 创建一个相反的动作，之前动作必须是By类型的。与坐标无关，只与动作相关。</p>
+
+<p>相反一系列动作：</p>
+
+<p>将CCSquence创建好的一系列动作赋值给一个CCFiniteTimeAction 指针，然后再调用这个指针的reverse。</p>
+
+<hr />
+
+<p>动作类型：</p>
+
+<p>CCActionInterval:</p>
+
+<p>类名</p>
+
+<p>功能</p>
+
+<p>CCMoveTo</p>
+
+<p>移动</p>
+
+<p>CCScaleTo</p>
+
+<p>放大</p>
+
+<p>CCSKewTo</p>
+
+<p>斜交（距离无穷的旋转）</p>
+
+<p>CCRotateTo</p>
+
+<p>旋转</p>
+
+<p>CCJumpTo</p>
+
+<p>跳动</p>
+
+<p>CCBezierTo</p>
+
+<p>贝塞尔曲线移动</p>
+
+<p>CCBlink</p>
+
+<p>闪烁</p>
+
+<p>CCFadeIn\Out</p>
+
+<p>渐隐</p>
+
+<p>CCTintTo</p>
+
+<p>上色</p>
+
+<p>CCToggleVisibility</p>
+
+<p>切换可见</p>
+
+<p>CCHide</p>
+
+<p>隐藏</p>
+
+<p>CCShow</p>
+
+<p>显示</p>
+
+<p>CCOrbitCamera</p>
+
+<p>轨道相机？能实现落叶翻转的效果</p>
+
+<p>CCCardinalSplineBy</p>
+
+<p>路径移动</p>
+
+<p>CCCatmullRomTo</p>
+
+<p>也是路径移动，不知道有什么区别</p>
+
+<hr />
+
+<p>一直重复动作：</p>
+
+<p>CCRepeatForever::create() 在runaAtion中把相应的动作套上这个类型即可。</p>
+
+<hr />
+
+<p>重复一次动作：</p>
+
+<p>CCRepeat::create() 在runaAtion中把相应的动作套上这个类型即可。</p>
+
+<hr />
+
+<p>同步：</p>
+
+<p>CCSpawn 与CCSquence用法一样只不过是同时执行。</p>
+
+<hr />
+
+<p>跟随精灵移动：</p>
+
+<p>CCFollow 运行Layer中的runAction。第二个参数为Layer的大小。</p>
+
+<hr />
+
+<p>多个精灵的动作序列：</p>
+
+<p>CCTargetedAction 与精灵相关的动作，创建好之后，可直接放到CCSqence中。</p>
+
+<hr />
+
+<p>动作叠加：</p>
+
+<p>精灵调用多次runAction可以使不同的动作叠加起来。</p>
+
+<hr />
+
+<p>动作的暂停与恢复：</p>
+
+<pre><code class="language-C++">//动作暂停：
+CCDirector::sharedDirector-&gt;getActionManager()-&gt;pauseAllRunningActions() /*即可暂停所有动作，返回值为一个CCSet* 要将其存入m_pPausedTargets中。使用时可参照：*/
+
+
+ CC_SAFE_RELEASE(m_pPausedTargets);
+
+m_pPausedTargets = director-getActionManager()-pauseAllRunningActions();
+
+CC_SAFE_RETAIN(m_pPausedTargets);
+
+//动作的恢复为：
+
+
+sharedDirector-getActionManager()-resumeTargets(m_pPausedTargets)
+</code></pre>
+
+<hr />
+:ET

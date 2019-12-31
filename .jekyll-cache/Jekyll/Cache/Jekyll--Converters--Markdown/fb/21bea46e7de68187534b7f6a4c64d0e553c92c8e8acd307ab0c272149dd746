@@ -1,0 +1,58 @@
+I"�<h3 id="cocostudio">CocoStudio</h3>
+<p>Cocos2d-x官方的编辑器，虽然…呵呵
+动画编辑（Animation Editor），UI编辑（UI Editor），场景编辑(Scene Editor),数据编辑（Number Editor）：</p>
+
+<p><a href="http://www.cocos2d-x.org/download" title=" http://www.cocos2d-x.org/download"> http://www.cocos2d-x.org/download</a>
+***</p>
+<h3 id="骨骼动画">骨骼动画</h3>
+
+<p>[<strong>dragonbones</strong>] (http://dragonbones.effecthub.com/)</p>
+
+<p><a href="http://esotericsoftware.com/"><strong>spine骨骼编辑器</strong></a></p>
+
+<hr />
+
+<h3 id="字体工具">字体工具</h3>
+<p><a href="http://www.angelcode.com/products/bmfont/"><strong>BMFont</strong></a></p>
+
+<p><a href="https://71squared.com/glyphdesigner"><strong>Glyph Designer</strong></a></p>
+
+<hr />
+
+<h3 id="图片编辑器">图片编辑器 </h3>
+<p>图片编辑器的功能比较简单，就是把一系列的图片拼接成一张大的图片，同时生成一个图片坐标文件。引擎在加载图片文件的时候，加载一张图片比加载N长图片的运算量小很多，占用内存也少很多。拼接声称的大图片文件盒其他图片文件一样，支持PNG等多种格式。至于图片坐标文件，建议使用plist结构，cocos2d-x引擎默认支持这个结构。</p>
+
+<p>Plist文件的生成工具主要包括：</p>
+
+<blockquote>
+  <p>1.<a href="http://zwopple.com/zwoptex/">zwoptex</a>	收费</p>
+
+  <p>2.<a href="https://www.codeandweb.com/texturepacker">TexturePacker</a>	收费 <strong><em>但是对开发者比较好可以用自己的blog申请license</em></strong></p>
+</blockquote>
+
+<hr />
+
+<h3 id="地图编辑器">地图编辑器</h3>
+
+<p> 游戏地图大致有横向地图和纵向地图，还有一种就是横向和纵向集合的地图。Cocos2d-x引擎自带了CCTileMapAtlas，CCTMXTileMap，CCTMXXMLParser，CCTMXLayer和CCTMXObjectGroup这几个类，也就是说cocos2d-x引擎直接支持瓦片地图（CCTileMapAtlas），直接支持TMX格式的瓦片地图（CCTMXTiledMap）。</p>
+
+<p> 瓦片地图（Tile Map）类似于拼图游戏，又或者像搭积木。元素是可以重复利用的，元素之间相互组合就可以行程一个大场景。图片一般保存在一个图片集欧诺个，通过某种映射方式把一个个小格子映射到相应的图片就形成地图了。</p>
+
+<p> TMX格式的瓦片地图。TMX是一种XML格式。它可以通过一些地图编辑器（比如Tile QT）生成.</p>
+
+<p><a href="http://www.mapeditor.org/download.html"> <strong>Tile Map Editor （TMX）</strong></a></p>
+
+<hr />
+
+<h3 id="粒子系统设计工具">粒子系统设计工具</h3>
+
+<p> Particle Designer是cocos2d-x引擎支持的粒子系统设计工具，但只支持Mac OS平台，并且是收费软件。Plist文件就是将粒子系统所需要的参数以XML形式组装起来。</p>
+
+<p> Cocos2d-x引擎不仅支持Particle Designer的所有特性，而且还提供了一些Particle Designer不支持的特性。</p>
+
+<p><a href="https://71squared.com/particledesigner">Particle Designer （Mac OS &amp; 收费）</a></p>
+
+<p><a href="https://github.com/fjz13/Cocos2d-x-ParticleEditor-for-Windows">Particle Editor (Windows &amp; 免费)</a></p>
+
+<hr />
+:ET

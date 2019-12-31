@@ -1,0 +1,38 @@
+I"j
+<p>后台运行的服务,被各种手机卫士和内存清理工具一清理或者onLowMemory时就被强行kill掉，有可能是系统回收内存的一种机制，要想避免这种情况可以通过startForeground让服务前台运行，当stopservice的时候通过stopForeground去掉。</p>
+
+<p>在service 的onStratCommand中执行</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Notification</span> <span class="n">notification</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Notification</span><span class="o">(</span><span class="no">R</span><span class="o">.</span><span class="na">drawable</span><span class="o">.</span><span class="na">ic_launcher</span><span class="o">,</span>
+
+                <span class="s">"XXXX"</span><span class="o">,</span>
+
+                <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">());</span>
+
+		<span class="nc">PendingIntent</span> <span class="n">pintent</span> <span class="o">=</span> <span class="nc">PendingIntent</span><span class="o">.</span><span class="na">getService</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">intent</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+
+		<span class="n">notification</span><span class="o">.</span><span class="na">setLatestEventInfo</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="s">"XXXX运行中"</span><span class="o">,</span>
+
+		        <span class="s">"点击打开XX"</span><span class="o">,</span> <span class="n">pintent</span><span class="o">);</span>
+
+		<span class="c1">//让该service前台运行，避免手机休眠时系统自动杀掉该服务</span>
+
+		<span class="c1">//如果 id 为 0 ，那么状态栏的 notification 将不会显示。</span>
+
+		<span class="n">startForeground</span><span class="o">(</span><span class="n">startId</span><span class="o">,</span> <span class="n">notification</span><span class="o">);</span>
+
+
+	<span class="nd">@Override</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">onDestroy</span><span class="o">()</span> <span class="o">{</span>
+
+		<span class="n">stopForeground</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+
+		<span class="kd">super</span><span class="o">.</span><span class="na">onDestroy</span><span class="o">();</span>
+
+	<span class="o">}</span>
+	
+</code></pre></div></div>
+
+<hr />
+:ET

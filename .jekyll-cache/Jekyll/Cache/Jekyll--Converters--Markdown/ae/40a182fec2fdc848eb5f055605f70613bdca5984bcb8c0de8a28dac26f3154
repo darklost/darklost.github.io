@@ -1,0 +1,22 @@
+I"T<p><code class="highlighter-rouge">持续收集更新中</code></p>
+
+<p>项目地址：<a href="https://github.com/darklost/tools.git">github</a></p>
+<h3 id="python脚本没有特殊注明都是基于python27">Python脚本（没有特殊注明，都是基于python2.7）</h3>
+
+<ol>
+  <li>
+    <p>ResGenerate.py
+一个用于Cocos2d-x中生成静态资源头文件的脚本工具</p>
+  </li>
+  <li>
+    <p>TextEcoding.py
+一个用于gbk——utf8之间编码转换的工具</p>
+  </li>
+  <li>
+    <p>unpack_plist.py
+一个用于解包TexturePacker打包的图集的工具</p>
+  </li>
+</ol>
+
+<hr />
+:ET
