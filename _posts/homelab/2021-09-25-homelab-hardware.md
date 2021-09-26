@@ -1,6 +1,6 @@
 ---
 layout: post  
-title: homelab-搭建日志-0x00-硬件
+title: homelab-搭建日志-0x01-硬件
 category: homelab  
 tags: 笔记 homelab  	
 keywords: homelab 搭建 硬件

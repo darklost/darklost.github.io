@@ -1,10 +1,10 @@
 ---
 layout: post  
-title: homelab-搭建日志-0x00-硬件
+title: homelab-搭建日志-0x02-虚拟化平台-ESXI
 category: homelab  
-tags: 笔记 homelab  	
-keywords: homelab 搭建 硬件
-description:  搭建自己的服务器 硬件
+tags: 笔记 homelab  虚拟化平台	
+keywords: homelab 搭建 虚拟化平台 ESXI
+description:  搭建自己的服务器 虚拟化平台 ESXI
 
 ---
 

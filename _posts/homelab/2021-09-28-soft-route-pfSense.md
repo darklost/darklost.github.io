@@ -1,10 +1,10 @@
 ---
 layout: post  
-title: homelab-搭建日志-0x00-硬件
+title: homelab-搭建日志-0x00-软路由-pfSense
 category: homelab  
-tags: 笔记 homelab  	
-keywords: homelab 搭建 硬件
-description:  搭建自己的服务器 硬件
+tags: 笔记 homelab  软路由 pfSense	
+keywords: homelab 搭建 软路由 pfSense
+description:  搭建自己的服务器 软路由 pfSense
 
 ---
 
