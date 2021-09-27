@@ -1,6 +1,6 @@
 ---
 layout: post  
-title: homelab-搭建日志-0x00-虚拟化平台-vCenter
+title: homelab-搭建日志-0x03-虚拟化平台-vCenter
 category: homelab  
 tags: 笔记 homelab  虚拟化平台
 keywords: homelab 搭建 虚拟化平台 vCenter

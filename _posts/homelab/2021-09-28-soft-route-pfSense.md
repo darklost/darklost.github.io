@@ -1,6 +1,6 @@
 ---
 layout: post  
-title: homelab-搭建日志-0x00-软路由-pfSense
+title: homelab-搭建日志-0x04-软路由-pfSense
 category: homelab  
 tags: 笔记 homelab  软路由 pfSense	
 keywords: homelab 搭建 软路由 pfSense
