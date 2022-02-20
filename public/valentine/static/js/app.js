@@ -7,7 +7,7 @@
 	        down: "一起看日落",
 		    yours: "有一天，你出现了",
 		    together: "然后",
-		    rose: "IOU,疫情过后我们就在一起吧；）"
+		    rose: "IOU"
 	    };
 
 	function render(element) {
