@@ -52,8 +52,8 @@
                 </div>
                 <canvas id="canvas" width="1100" height="780"></canvas>
             </div>
-            <!-- <audio src="./FirstTime_files/love.mp3" autoplay="autoplay"></audio> -->
-            <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=0 height=0 src="http://music.163.com/song/media/outer/url?id=1330348068.mp3"></iframe>
+            <audio id="bgm" src="./FirstTime_files/love.mp3" preload  hidden></audio>
+            <!-- <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=0 height=0 src="http://music.163.com/song/media/outer/url?id=1330348068.mp3"></iframe> -->
         </div>
     
     <script>
@@ -62,7 +62,6 @@
     <script>
     (function(){
         var canvas = $('#canvas');
-
         if (!canvas[0].getContext) {
             $("#error").show();
             return false;
@@ -124,6 +123,12 @@
                 canvas.unbind("click");
                 canvas.unbind("mousemove");
                 canvas.removeClass('hand');
+               
+                var bgm = document.getElementById('bgm'); 
+                // console.log("bgm",bgm);
+                bgm.play();
+            
+
             }
         }).mousemove(function(e){
             var offset = canvas.offset(), x, y;
