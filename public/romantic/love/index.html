@@ -125,7 +125,7 @@ window.addEventListener("resize", onResize);
 requestAnimationFrame(render);
 
 window.onload=function starttime(){
-		time(h1,'2022/02/03 11:00:00');	 // 在一起的时间
+		time(h1,'1990/02/03 13:00:00');	 // 在一起的时间
 		ptimer = setTimeout(starttime,1000); // 添加计时器
 }
 
@@ -140,7 +140,7 @@ window.onload=function starttime(){
 		var second = parseInt(time%60);  // 以60秒为一整份 取余 剩下秒数
 //				console.log(hour+":"+minute+":"+second)
 //				alert(hour)
-		obj.innerHTML="Mia小可爱<br>我们认识有：<br>"+day+"天"+hour+"小时"+minute+"分"+second+"秒"+"了<br><span>一时间不知道从哪说起。<br>这个计时器是我自己做的放在个人博客上，希望它永远不会停止.</span>"
+		obj.innerHTML="<br>我们还未认识的：<br>"+day+"天"+hour+"小时"+minute+"分"+second+"秒"+"了<br><span>一时间不知道从哪说起。<br>这个计时器是我自己做的放在个人博客上，希望它永远不会停止.</span>"
 
 		return true;
 	}
