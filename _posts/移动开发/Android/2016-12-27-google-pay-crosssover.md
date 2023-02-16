@@ -27,7 +27,7 @@ description:
 1. 源代码
    1. 添加无用垃圾代码
    2. 混淆
-      - 混淆工具 (XmlClassGuard)[https://juejin.cn/post/7079955014822674468?share_token=f67559fa-2099-439b-9815-da6a1df75398]
+      - 混淆工具 [XmlClassGuard](https://juejin.cn/post/7079955014822674468?share_token=f67559fa-2099-439b-9815-da6a1df75398)
 2. 资源文件
    1. 修改资源文件二进制
    2. 替换资源
