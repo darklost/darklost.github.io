@@ -1,8 +1,8 @@
 ---
 layout: post  
 title: 基于skynet的游戏服务器思考
-category: 技术 游戏 服务端 转载
-tags: game server skynet
+category: 技术
+tags: game server skynet 转载
 keywords: game server 
 description:   
 ---

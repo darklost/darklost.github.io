@@ -1,8 +1,8 @@
 ---
 layout: post  
 title: 游戏服务器高并发、高性能、高可用
-category: 技术  游戏 服务端 转载
-tags: game server skynet
+category: 技术
+tags: game server skynet 转载
 keywords: game server hc hp ha
 description:   
 ---
