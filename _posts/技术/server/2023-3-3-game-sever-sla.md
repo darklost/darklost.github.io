@@ -7,7 +7,7 @@ keywords: game server hc hp ha
 description:   
 ---
 
-转载自[https://zhuanlan.zhihu.com/p/342953318](https://zhuanlan.zhihu.com/p/342953318)
+
 
 > 高并发和高可用是一个相辅相成的工作，当我们支持百万玩家同时在线时却无法保证服务器稳定可用，那高并发支持就无从谈起；而如果当玩家数量较多时服务器就常常出问题，那也不能称为高可用。
 

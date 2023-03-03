@@ -7,7 +7,7 @@ keywords: game server
 description:   
 ---
   
-转载自[https://zhuanlan.zhihu.com/p/341855913](https://zhuanlan.zhihu.com/p/341855913) 
+
 
 ### 1. 所有的代码都要能热更
 > bug是难免的，但可以尽量降低bug对玩家的影响 
